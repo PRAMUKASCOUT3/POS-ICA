@@ -10,6 +10,11 @@ use PDF;
 
 class ProductController extends Controller
 {
+    public function index()
+    {
+        $products = Product::all();
+        return view('products.index', compact('products'));
+    }
     public function create()
     {
         $category = Category::all();

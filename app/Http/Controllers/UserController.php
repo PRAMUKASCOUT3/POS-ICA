@@ -9,13 +9,18 @@ use PDF;
 
 class UserController extends Controller
 {
+    public function index()
+    {
+        $users = User::all();
+        return view('user.index', compact('users'));
+    }
     public function edit($id)
     {
         $user = User::find($id);
         return view('user.edit', compact('user'));
     }
 
-    public function index()
+    public function dashboard()
     {
         $completedPercentages = [];
         $totalTransactionCodes = [];

@@ -4,7 +4,7 @@
 <div class="container">
     <div class="card">
         <div class="card-body">
-            <a href="{{ route('pengguna.print') }}" class="btn badge bg-danger btn-sm mb-3">PDF</a>
+            <a href="{{ route('pengguna.print') }}" class="btn btn-danger mb-3">Download PDF <i class="fas fa-file-pdf"></i></a>
             <h5 class="card-title">Laporan Pengguna / Kasir</h5>
             <table class="table table-striped mb-0">
                 <thead>
