@@ -129,9 +129,9 @@
                                 <!-- Tombol Bayar dan Reset -->
                                 <input type="text" wire:model='user_id' hidden>
                                 <div class="mt-3 d-flex justify-content-end">
-                                    <button type="button" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    {{-- <button type="button" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                         Via Bank
-                                      </button>
+                                      </button> --}}
                                     <button class="btn btn-success me-2" wire:click="saveTransaction">Bayar <i class="fas fa-vote-yea"></i></button>
                                 </div>
                             </div>
