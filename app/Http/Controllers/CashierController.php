@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\CashiersExport;
 use App\Models\Cashier;
 use App\Models\Expenditure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 use PDF;
 
 class CashierController extends Controller
@@ -33,49 +35,83 @@ class CashierController extends Controller
 
     public function report(Request $request)
     {
-        // Query for transactions with optional date filtering
-        $query = Cashier::with(['product']);
-    
-        if ($request->start_date && $request->end_date) {
-            // Apply date filtering
-            $query->whereBetween('date', [$request->start_date, $request->end_date]);
-        }
-    
-        // Paginate the filtered or unfiltered results
-        $cashier = $query->paginate(10);
+        // Mengambil input filter tanggal
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
 
-        $expenditure = Expenditure::all();
-    
-        return view('cashier.laporan', compact('cashier','expenditure'));
+        // Filter data kasir berdasarkan tanggal
+        $cashier = Cashier::when($start_date && $end_date, function ($query) use ($start_date, $end_date) {
+            $query->whereBetween('date', [$start_date, $end_date]);
+        })->paginate(10);
+
+        // Filter data pengeluaran berdasarkan tanggal
+        $expenditure = Expenditure::when($start_date && $end_date, function ($query) use ($start_date, $end_date) {
+            $query->whereBetween('date', [$start_date, $end_date]);
+        })->get();
+
+        // Total pendapatan dan pengeluaran
+        $total_pendapatan = $cashier->sum('subtotal');
+        $pengeluaran = $expenditure->sum('nominal');
+        $total_semua = $total_pendapatan - $pengeluaran;
+
+        // Return data ke view
+        return view('cashier.laporan', compact('cashier', 'expenditure', 'total_pendapatan', 'pengeluaran', 'total_semua'));
     }
-    
+
+
 
 
     public function generatePDF(Request $request)
     {
-        // Query for transactions with optional date filtering
-        $query = Cashier::with('product');
+        // Mengambil input filter tanggal
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
 
-        if ($request->start_date && $request->end_date) {
-            // Apply date filtering
-            $query->whereBetween('date', [$request->start_date, $request->end_date]);
-        }
+        // Query untuk transaksi dengan filter tanggal
+        $cashier = Cashier::with('product')
+            ->when($start_date && $end_date, function ($query) use ($start_date, $end_date) {
+                $query->whereBetween('date', [$start_date, $end_date]);
+            })
+            ->get();
 
-        // Get the filtered or unfiltered results
-        $cashier = $query->get();
-        $expenditure = Expenditure::all();
-        // Prepare data for the PDF view
+        // Query untuk pengeluaran dengan filter tanggal
+        $expenditure = Expenditure::when($start_date && $end_date, function ($query) use ($start_date, $end_date) {
+            $query->whereBetween('date', [$start_date, $end_date]);
+        })->get();
+
+        // Hitung total pendapatan dan pengeluaran
+        $total_pendapatan = $cashier->sum('subtotal');
+        $total_pengeluaran = $expenditure->sum('nominal');
+        $total_keseluruhan = $total_pendapatan - $total_pengeluaran;
+
+        // Siapkan data untuk PDF
         $data = [
             'title' => 'Laporan Transaksi',
             'cashier' => $cashier,
+            'expenditure' => $expenditure,
             'user' => Auth::user(),
-            'start_date' => $request->start_date,
-            'end_date' => $request->end_date,
-            'expenditure' => $expenditure
+            'start_date' => $start_date,
+            'end_date' => $end_date,
+            'total_pendapatan' => $total_pendapatan,
+            'total_pengeluaran' => $total_pengeluaran,
+            'total_keseluruhan' => $total_keseluruhan,
         ];
 
-        // Generate and download the PDF
+        // Generate PDF menggunakan view
         $pdf = PDF::loadView('cashier.pdf', $data);
+
+        // Download file PDF
         return $pdf->download('Laporan_Transaksi.pdf');
     }
+
+    public function excel(Request $request)
+    {
+        // Mengambil filter tanggal dari request
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+    
+        // Passing parameter filter ke CashiersExport
+        return Excel::download(new CashiersExport($start_date, $end_date), 'laporan_transaksi.xlsx');
+    }
+    
 }

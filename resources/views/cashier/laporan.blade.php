@@ -12,6 +12,11 @@
                         <input type="hidden" name="end_date" value="{{ request('end_date') }}">
                         <button type="submit" class="btn btn-danger">Download PDF <i class="fas fa-file-pdf"></i></button>
                     </form>
+                    <form action="{{ route('cashier.excel') }}" method="GET" style="margin-right: 10px">
+                        <input type="hidden" name="start_date" value="{{ request('start_date') }}">
+                        <input type="hidden" name="end_date" value="{{ request('end_date') }}">
+                        <button type="submit" class="btn btn-success">Download Excel <i class="fas fa-file-excel"></i></button>
+                    </form>
                 
                     <!-- Filter Form -->
                     <form method="GET" action="{{ route('cashier.report') }}" class="d-flex align-items-center">
@@ -62,9 +67,11 @@
                                     <td>{{ $items->first()->product->name }}</td>
                                     <td>{{ $items->first()->total_item }}</td>
                                     <td rowspan="{{ $items->count() }}">Rp.
-                                        {{ number_format($items->sum('subtotal'), 0, ',', '.') }}</td>
+                                        {{ number_format($items->sum('subtotal'), 0, ',', '.') }}
+                                    </td>
                                     <td rowspan="{{ $items->count() }}">Rp.
-                                        {{ number_format($items->first()->amount_paid, 0, ',', '.') }}</td>
+                                        {{ number_format($items->first()->amount_paid, 0, ',', '.') }}
+                                    </td>
                                     <td rowspan="{{ $items->count() }}">
                                         <span
                                             class="btn bedge bg-success text-white">{{ ucfirst($items->first()->status) }}</span>
@@ -78,35 +85,27 @@
                                 @endforeach
                             @endforeach
                         </tbody>
-
-                        @php
-                            $total_pendapatan = $cashier->sum('subtotal');
-
-                            $pengeluaran = $expenditure->sum('nominal');
-
-                            $total_semua = $total_pendapatan - $pengeluaran;
-                        @endphp
-                        <tr>
-                            <td>Total Pendapatan <i class="fas fa-hand-holding-usd"></i></td>
-                            <td colspan="4"></td>
-                            <td>Rp. {{ number_format($total_pendapatan, 2) }}</td>
-                            <td colspan="3"></td>
-
-                        </tr>
-                        <tr>
-                            <td>Pengeluaran <i class="fas fa-file-invoice-dollar"></i></td>
-                            <td colspan="4"></td>
-                            <td>Rp. {{ number_format($pengeluaran, 2) }}</td>
-                            <td colspan="3"></td>
-
-                        </tr>
-                        <tr>
-                            <td>Total Keseluruhan <i class="fas fa-money-check-alt"></i></td>
-                            <td colspan="4"></td>
-                            <td>Rp. {{ number_format($total_semua, 2) }}</td>
-                            <td colspan="3"></td>
-
-                        </tr>
+                        <tfoot>
+                            <tr>
+                                <td>Total Pendapatan <i class="fas fa-hand-holding-usd"></i></td>
+                                <td colspan="4"></td>
+                                <td>Rp. {{ number_format($total_pendapatan, 2, ',', '.') }}</td>
+                                <td colspan="3"></td>
+                            </tr>
+                            <tr>
+                                <td>Pengeluaran <i class="fas fa-file-invoice-dollar"></i></td>
+                                <td colspan="4"></td>
+                                <td>Rp. {{ number_format($pengeluaran, 2, ',', '.') }}</td>
+                                <td colspan="3"></td>
+                            </tr>
+                            <tr>
+                                <td>Total Keseluruhan <i class="fas fa-money-check-alt"></i></td>
+                                <td colspan="4"></td>
+                                <td>Rp. {{ number_format($total_semua, 2, ',', '.') }}</td>
+                                <td colspan="3"></td>
+                            </tr>
+                        </tfoot>
+                        
                     </table>
                 </div>
 

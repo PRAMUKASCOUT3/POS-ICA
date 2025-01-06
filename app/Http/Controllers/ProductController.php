@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ProductsExport;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 use PDF;
 
 class ProductController extends Controller
@@ -43,5 +45,17 @@ class ProductController extends Controller
         ];
         $pdf = PDF::loadView('products.print', $data);
         return $pdf->download('Laporan_Produk.pdf');
+    }
+
+    public function export() 
+    {
+        return Excel::download(new ProductsExport, 'laporan_produts.xlsx');
+    }
+
+    public function delete($id)
+    {
+        $product = Product::find($id);
+        $product->delete();
+        return redirect()->back()->with('success','Produk berhasil dihapus');
     }
 }

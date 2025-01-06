@@ -16,11 +16,18 @@ class DatabaseSeeder extends Seeder
     {
         DB::table('users')->insert([
             [
+                'name' => 'Pemilik',
+                'code' => '12345678',
+                'email' => 'pemilik@gmail.com',
+                'password' => Hash::make('password'),
+                'isAdmin' => 1
+            ],
+            [
                 'name' => 'Admin',
                 'code' => '12345678',
                 'email' => 'admin@gmail.com',
                 'password' => Hash::make('password'),
-                'isAdmin' => 1
+                'isAdmin' => 2
             ],
             [
                 'name' => 'User',
@@ -30,6 +37,13 @@ class DatabaseSeeder extends Seeder
                 'isAdmin' => 0
             ],
         ]);
-        \App\Models\User::factory()->count(20)->create(); 
+        \App\Models\User::factory()->count(10)->create(); 
+
+        $this->call([
+            SupplierSeeder::class,
+            CategorySeeder::class,
+            ProductSeeder::class,
+            ExpenditureSeeder::class,
+        ]);
     }
 }

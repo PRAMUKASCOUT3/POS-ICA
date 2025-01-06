@@ -24,4 +24,10 @@ class SupplierController extends Controller
         // Return the supplier details in a view
         return view('suppliers.edit', compact('suppliers'));
     }
+
+    public function delete($id)
+    {
+        Supplier::find($id)->delete();
+        return redirect()->back()->with('success', 'Data Berhasil Dihapus');
+    }
 }

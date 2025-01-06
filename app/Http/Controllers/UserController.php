@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\UsersExport;
 use App\Models\Cashier;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use PDF;
 
 class UserController extends Controller
@@ -65,6 +67,17 @@ class UserController extends Controller
         ];
         $pdf = PDF::loadView('user.print', $data);
         return $pdf->download('Laporan_Pengguna_Kasir.pdf');
+    }
+
+    public function export() 
+    {
+        return Excel::download(new UsersExport, 'users.xlsx');
+    }
+
+    public function delete($id)
+    {
+        User::find($id)->delete();
+        return redirect()->route('pengguna.index')->with('success', 'Data Berhasil Dihapus');
     }
     
 }

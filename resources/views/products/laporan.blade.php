@@ -5,6 +5,7 @@
         <div class="card">
             <div class="card-body">
                 <a href="{{ route('product.print') }}" class="btn btn-danger mb-3">Download PDF <i class="fas fa-file-pdf"></i></a>
+                <a href="{{ route('product.excel') }}" class="btn btn-success mb-3">Download Excel <i class="fas fa-file-excel"></i></a>
                 <h5 class="card-title">Laporan Produk</h5>
                 <table id="example" class="table table-striped mt-2">
                     <thead>

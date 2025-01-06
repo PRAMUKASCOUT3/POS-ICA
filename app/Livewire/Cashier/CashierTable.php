@@ -74,7 +74,7 @@ class CashierTable extends Component
 
         // Validasi pembayaran
         if ($this->amount_paid < $this->subtotal) {
-            toastr()->error('Jumlah pembayaran tidak cukup!');
+            toastr()->error('Masukan Nominal Pembayaran!');
             return;
         }
 

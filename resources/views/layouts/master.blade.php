@@ -33,7 +33,7 @@
             <footer>
                 <div class="footer clearfix mb-0 text-muted">
                     <div class="float-start">
-                        <p>2021 &copy; Mazer</p>
+                        <p>2024 &copy; Skirpsi</p>
                     </div>
                     <div class="float-end">
                         <p>Crafted with <span class="text-danger"><i class="bi bi-heart"></i></span> by <a
@@ -67,6 +67,27 @@
         });
     </script>
 <script src="https://kit.fontawesome.com/be87c3e44a.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function confirmDelete(id) {
+        Swal.fire({
+            title: 'Apa Kamu Yakin ingin Menghapus Data?',
+            text: "Data akan terhapus permanen",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Hapus!',
+            cancelButtonText: "Batal",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // If the user clicks "Yes," submit the form
+                document.getElementById('deleteForm' + id).submit();
+                
+            }
+        });
+    }
+</script>
 @include('partials.time')    
 
 </body>

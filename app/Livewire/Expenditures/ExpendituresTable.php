@@ -22,7 +22,7 @@ class ExpendituresTable extends Component
 
     public function delete($id)
     {
-        $expenditure  = Expenditure::find($id);
+        $expenditure  = Expenditure::findorFail($id);
         $expenditure->delete();
         toastr()->success('Data Berhasil Dihapus!');
         $this->dispatch('Delete');

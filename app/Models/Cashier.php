@@ -20,7 +20,7 @@ class Cashier extends Model
         'total_item',
         'subtotal',
         'amount_paid',
-        'status'
+        'status',
     ];
 
     public function user():BelongsTo
