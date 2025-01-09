@@ -54,9 +54,9 @@ class Product extends Model
         return $newKode;
     }
 
-    public function cashiers():HasMany
+    public function transaction():HasMany
     {
-        return $this->hasMany(Cashier::class);
+        return $this->hasMany(Transaction::class);
     }
 
     

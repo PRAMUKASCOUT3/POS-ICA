@@ -129,9 +129,7 @@
                                 <!-- Tombol Bayar dan Reset -->
                                 <input type="text" wire:model='user_id' hidden>
                                 <div class="mt-3 d-flex justify-content-end">
-                                    {{-- <button type="button" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                        Via Bank
-                                      </button> --}}
+                                   
                                     <button class="btn btn-success me-2" wire:click="saveTransaction">Bayar <i class="fas fa-vote-yea"></i></button>
                                 </div>
                             </div>
@@ -141,36 +139,4 @@
             </div>
         </div>
     </div>
-    {{-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Pembayaran via Bank</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="mb-3">
-                            <label for="bankName" class="form-label">Nama Bank</label>
-                            <select name="" id="" class="form-control">
-                                <option value="Mandiri">Mandiri</option>
-                                <option value="BCA">BCA</option>
-                                <option value="BRI">BRI</option>
-                                <option value="BNI">BNI</option>
-                                <option value="BANK 9">BANK 9</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="bankAccount" class="form-label">Nomor Rekening</label>
-                            <input type="number" class="form-control" id="bankAccount" placeholder="Masukkan nomor rekening">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                    <button type="button" class="btn btn-primary">Simpan</button>
-                </div>
-            </div>
-        </div>
-    </div> --}}
 </div>

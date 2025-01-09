@@ -46,9 +46,9 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function cashiers():HasMany
+    public function transaction():HasMany
     {
-        return $this->hasMany(Cashier::class);
+        return $this->hasMany(Transaction::class);
     }
 
     protected static function boot()

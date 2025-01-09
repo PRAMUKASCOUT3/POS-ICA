@@ -4,6 +4,7 @@ namespace App\Livewire\Cashier;
 
 use App\Models\Cashier;
 use App\Models\Product;
+use App\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -79,7 +80,7 @@ class CashierTable extends Component
         }
 
         foreach ($this->items as $item) {
-            $cashier = Cashier::create([
+            $cashier = Transaction::create([
                 'code' => 'TRX-' . now()->timestamp, // Kode transaksi unik
                 'user_id' => Auth::id(),
                 'product_id' => $item['id'], // Mengambil ID produk dari item yang diiterasi
