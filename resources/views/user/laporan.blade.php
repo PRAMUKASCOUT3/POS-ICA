@@ -14,7 +14,6 @@
                         <th>Kode Kasir <i class="fas fa-code"></i></th>
                         <th>Nama Pengguna / Kasir <i class="fas fa-users"></i></th>
                         <th>Email <i class="fas fa-envelope"></i></th>
-                        <th>Aksi <i class="fas fa-cogs"></i></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -24,14 +23,6 @@
                             <td>{{ $user->code }}</td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
-                            <td>
-                                <a href="{{ route('pengguna.edit',$user->id) }}"
-                                    class="btn btn-info btn-sm ">Edit</a>
-                                <button class="btn btn-danger btn-sm" wire:click="delete({{ $user->id }})"
-                                    onclick="confirm('Apakah kamu yakin ingin menghapus data ini?') || event.stopImmediatePropagation();">
-                                    Hapus
-                                </button>
-                            </td>
                         </tr>
                     @endforeach
                 </tbody>

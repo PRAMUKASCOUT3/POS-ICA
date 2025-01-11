@@ -26,8 +26,7 @@ class ExpenditureController extends Controller
     {
         $expenditure = Expenditure::find($id);
         $expenditure->delete();
-        toastr()->success('Data Berhasil Dihapus!');
-        return redirect()->route('expenditures.index');
+        return redirect()->route('expenditures.index')->with('success','Data Berhasil Dihapus');
     }
 
     public function show()

@@ -12,18 +12,30 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('transactions', function (Blueprint $table) {
-            $table->id();
-            $table->string('code');
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete()->nullable(); //
-            $table->foreignId('product_id')->constrained()->cascadeOnDelete(); //
-            $table->string('date');
-            $table->string('total_item');
+            $table->unsignedInteger('id_cashier')->autoIncrement();
+            $table->string('code',8);
+            $table->unsignedInteger('id_user')->nullable(); // Pastikan menggunakan unsignedInteger
+            $table->foreign('id_user')
+                ->references('id_user')
+                ->on('users')
+                ->cascadeOnDelete();
+            $table->unsignedInteger('id_product')->nullable(); // Pastikan menggunakan unsignedInteger
+            $table->foreign('id_product')
+                ->references('id_product')
+                ->on('products')
+                ->cascadeOnDelete();
+            $table->string('date',10);
+            $table->string('total_item',15);
             $table->decimal('subtotal', 10, 2);
-            $table->decimal('amount_paid', 10, 2); 
-            $table->enum('status', ['completed', 'pending', 'canceled'])->default('pending'); // Status transaksi
+            $table->decimal('amount_paid', 10, 2);
+            $table->string('status',15);
             $table->timestamps();
         });
     }
+
+
+
+
 
     /**
      * Reverse the migrations.

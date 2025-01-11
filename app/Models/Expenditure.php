@@ -10,12 +10,15 @@ class Expenditure extends Model
 {
     use HasFactory;
     protected $table = 'expenditures';
+    protected $primaryKey = 'id_expenditure';
+    public $incrementing = true; // Auto-increment
+    protected $keyType = 'int'; // Tipe data primary key
     protected $fillable = [
         'date',
         'description',
         'nominal'
     ];
-    
+
     /**
      * Get all of the cashiers for the Expenditure
      *
@@ -25,6 +28,4 @@ class Expenditure extends Model
     {
         return $this->hasMany(Transaction::class);
     }
-
-    
 }

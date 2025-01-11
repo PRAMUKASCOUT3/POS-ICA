@@ -25,11 +25,10 @@ class CashierController extends Controller
     public function history()
     {
         // Mengambil data transaksi dengan paginasi
-        $cashier = Transaction::where('user_id', Auth::id())
+        $cashier = Transaction::where('id_user', Auth::id())
             ->with('product') // Include relasi dengan produk
             ->orderBy('created_at', 'desc')
             ->paginate(10); // Menggunakan paginate
-
         return view('cashier.history', compact('cashier'));
     }
 

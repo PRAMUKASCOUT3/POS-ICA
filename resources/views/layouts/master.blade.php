@@ -27,21 +27,78 @@
 <body>
     <div id="app">
         @include('partials.sidebar')
-        <div id="main">
-            @yield('content')
+        <div id="main" class="layout-navbar">
+            <header class='mb-3'>
+                <nav class="navbar navbar-expand navbar-light ">
+                    <div class="container-fluid">
+                        <a href="#" class="burger-btn d-block">
+                            <i class="bi bi-justify fs-3"></i>
+                        </a>
 
-            <footer>
-                <div class="footer clearfix mb-0 text-muted">
-                    <div class="float-start">
-                        <p>2024 &copy; Skirpsi</p>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                                @php
+                                    $user = Auth::user();
+                                @endphp
+                            </ul>
+                            <div class="dropdown">
+                                <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <div class="user-menu d-flex">
+                                        <div class="user-name text-end me-3">
+                                            <h6 class="mb-0 text-gray-600">{{ $user->name }}</h6>
+                                            @if (Auth()->user()->isAdmin == 2)
+                                            <p class="mb-0 text-sm text-gray-600">Administrator</p>
+                                            @elseif (Auth()->user()->isAdmin ==1)
+                                            <p class="mb-0 text-sm text-gray-600">Owner</p>
+                                            @else
+                                            <p class="mb-0 text-sm text-gray-600">Kasir</p>
+                                            @endif
+                                        </div>
+                                        <div class="user-img d-flex align-items-center">
+                                            <div class="avatar avatar-md">
+                                                <img src="/assets/images/faces/1.jpg">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+                                    <li>
+                                        <h6 class="dropdown-header">Hello, {{ $user->name }}</h6>
+                                    </li>
+                                    <form action="{{ route('logout') }}" method="post">
+                                        @csrf
+
+                                        <button class="dropdown-item" type="submit"><i
+                                            class="icon-mid bi bi-box-arrow-left me-2"></i>Logout</button>
+                                    </form>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <div class="float-end">
-                        <p>Crafted with <span class="text-danger"><i class="bi bi-heart"></i></span> by <a
-                                href="http://ahmadsaugi.com">A. Saugi</a></p>
+                </nav>
+            </header>
+            <div id="main-content">
+                @yield('content')
+    
+                <footer>
+                    <div class="footer clearfix mb-0 text-muted">
+                        <div class="float-start">
+                            <p>2024 &copy; Skirpsi</p>
+                        </div>
+                        <div class="float-end">
+                            <p>Crafted with <span class="text-danger"><i class="bi bi-heart"></i></span> by <a
+                                    href="http://ahmadsaugi.com">A. Saugi</a></p>
+                        </div>
                     </div>
-                </div>
-            </footer>
+                </footer>
+            </div>
         </div>
+        
     </div>
 
 
@@ -66,29 +123,29 @@
             $('#example').DataTable();
         });
     </script>
-<script src="https://kit.fontawesome.com/be87c3e44a.js" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-    function confirmDelete(id) {
-        Swal.fire({
-            title: 'Apa Kamu Yakin ingin Menghapus Data?',
-            text: "Data akan terhapus permanen",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Hapus!',
-            cancelButtonText: "Batal",
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // If the user clicks "Yes," submit the form
-                document.getElementById('deleteForm' + id).submit();
-                
-            }
-        });
-    }
-</script>
-@include('partials.time')    
+    <script src="https://kit.fontawesome.com/be87c3e44a.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function confirmDelete(id) {
+            Swal.fire({
+                title: 'Apa Kamu Yakin ingin Menghapus Data?',
+                text: "Data akan terhapus permanen",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Hapus!',
+                cancelButtonText: "Batal",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // If the user clicks "Yes," submit the form
+                    document.getElementById('deleteForm' + id).submit();
+
+                }
+            });
+        }
+    </script>
+    @include('partials.time')
 
 </body>
 

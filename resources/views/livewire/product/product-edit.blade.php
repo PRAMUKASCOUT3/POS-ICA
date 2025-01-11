@@ -6,14 +6,14 @@
                 <form wire:submit="update">
                     <input type="text" wire:mode="code" hidden>
                     <div class="mt-3">
-                        <label for="category_id">Kategori Produk <i class="fas fa-clipboard-list"></i></label>
-                        <select wire:model="category_id" id="category_id" class="form-control">
+                        <label for="id_category">Kategori Produk <i class="fas fa-clipboard-list"></i></label>
+                        <select wire:model="id_category" id="id_category" class="form-control">
                             <option value="">==Pilih Kategori Produk==</option>
                             @foreach ($category as $item)
-                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                <option value="{{ $item->id_category }}" @if($item->id == $id_category) selected @endif>{{ $item->name }}</option>
                             @endforeach
                         </select>
-                        @error('category_id')
+                        @error('id_category')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>

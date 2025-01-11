@@ -13,7 +13,7 @@ class CashierTable extends Component
 {
     public $items = [];
     public $subtotal = 0;
-    public $amount_paid = 0;
+    public $amount_paid ;
     public $total_item = 0;
     public $date;
     public $status = 'pending';
@@ -43,7 +43,7 @@ class CashierTable extends Component
     {
         $product = Product::find($productId);
         $this->items[] = [
-            'id' => $product->id,
+            'id_product' => $product->id_product,
             'name' => $product->name,
             'price_sell' => $product->price_sell,
             'stock' => 1,
@@ -79,20 +79,21 @@ class CashierTable extends Component
             return;
         }
 
+        // Loop over the items and create a transaction for each
         foreach ($this->items as $item) {
-            $cashier = Transaction::create([
+            $transaction = Transaction::create([
                 'code' => 'TRX-' . now()->timestamp, // Kode transaksi unik
-                'user_id' => Auth::id(),
-                'product_id' => $item['id'], // Mengambil ID produk dari item yang diiterasi
-                'date' => now(), // Menggunakan waktu sekarang sebagai tanggal transaksi
-                'total_item' => $item['stock'], // Menyimpan jumlah item per produk
-                'subtotal' => $item['price_sell'] * $item['stock'], // Subtotal per item
-                'amount_paid' => $this->amount_paid,
-                'status' => 'completed',
+                'id_user' => Auth::id(), // Get the current authenticated user ID
+                'id_product' => $item['id_product'], // Get product ID from the item
+                'date' => now()->toDateTimeString(), // Using current date and time
+                'total_item' => $item['stock'], // Total quantity of the product
+                'subtotal' => $item['price_sell'] * $item['stock'], // Calculate subtotal per item
+                'amount_paid' => $this->amount_paid, // Payment amount
+                'status' => 'completed', // Transaction status
             ]);
 
-            // Update stok produk
-            $product = Product::find($item['id']);
+            // Update product stock
+            $product = Product::find($item['id_product']);
             if ($product->stock >= $item['stock']) {
                 $product->stock -= $item['stock'];
                 $product->save();
@@ -117,6 +118,7 @@ class CashierTable extends Component
         // Redirect ke halaman cetak
         return redirect()->route('cashier.print');
     }
+
 
 
     public function clear()

@@ -10,13 +10,17 @@ class ExpendituresCreate extends Component
     public $date,$description,$nominal;
     protected $rules = [
         'date' => 'required|date',
-        'description' =>'required|min:5',
-        'nominal' =>'required|numeric|min:1000'
+        'description' =>'required',
+        'nominal' =>'required|numeric'
     ];
 
     public function save()
     {
-        $this->validate();
+        $this->validate([
+            'date' => 'required|date',
+        'description' =>'required|min:5',
+        'nominal' =>'required|numeric'
+        ]);
 
         Expenditure::create([
             'date' => $this->date,

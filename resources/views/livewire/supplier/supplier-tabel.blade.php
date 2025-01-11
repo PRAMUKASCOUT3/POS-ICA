@@ -23,14 +23,14 @@
                                     <td>{{ $supplier->address }}</td>
                                     <td>
                                         <div class="d-flex justify-content-center">
-                                            <a href="{{ route('supplier.edit', $supplier->id) }}"
+                                            <a href="{{ route('supplier.edit', $supplier->id_supplier) }}"
                                                 class="btn btn-info btn-sm me-2 ">Edit</a>
-                                            <form id="deleteForm{{ $supplier->id }}" class="d-inline"
-                                                action="{{ route('supplier.delete', $supplier->id) }}" method="post">
+                                            <form id="deleteForm{{ $supplier->id_supplier }}" class="d-inline"
+                                                action="{{ route('supplier.delete', $supplier->id_supplier) }}" method="post">
                                                 @csrf
                                                 @method('delete')
                                                 <button type="button" class="btn btn-danger btn-sm"
-                                                    onclick="confirmDelete({{ $supplier->id }})">Hapus</button>
+                                                    onclick="confirmDelete({{ $supplier->id_supplier }})">Hapus</button>
                                             </form>
                                         </div>
                                     </td>

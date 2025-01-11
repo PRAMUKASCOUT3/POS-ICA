@@ -9,7 +9,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Category extends Model
 {
     use HasFactory;
-    protected $table = 'categories';
+    protected $table = 'categories'; // Nama tabel di database
+    protected $primaryKey = 'id_category'; // Primary key tabel
+    public $incrementing = true; // Jika primary key menggunakan auto-increment
+    protected $keyType = 'int'; // Tipe data primary key
 
     protected $fillable = [
         'name'

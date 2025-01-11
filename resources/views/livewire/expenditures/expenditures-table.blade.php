@@ -54,13 +54,13 @@
                                         <td>Rp. {{ number_format($item->nominal) }}</td>
                                         <td>
                                             <div class="d-flex justify-content-center">
-                                                <a href="{{ route('expenditures.edit', $item->id) }}" class="btn btn-info btn-sm" style="margin-right: 5px">Edit</a>
-                                                <form id="deleteForm{{ $item->id }}" class="d-inline"
-                                                    action="{{ route('expenditures.delete', $item->id) }}" method="post">
+                                                <a href="{{ route('expenditures.edit', $item->id_expenditure) }}" class="btn btn-info btn-sm" style="margin-right: 5px">Edit</a>
+                                                <form id="deleteForm{{ $item->id_expenditure }}" class="d-inline"
+                                                    action="{{ route('expenditures.delete', $item->id_expenditure) }}" method="post">
                                                     @csrf
                                                     @method('delete')
                                                     <button type="button" class="btn btn-danger btn-sm"
-                                                        onclick="confirmDelete({{ $item->id }})">Hapus</button>
+                                                        onclick="confirmDelete({{ $item->id_expenditure }})">Hapus</button>
                                                 </form>
                                             </div>
                                         </td>

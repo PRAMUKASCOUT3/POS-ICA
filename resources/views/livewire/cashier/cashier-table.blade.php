@@ -30,7 +30,7 @@
                                                         <span>
                                                             {{ $item->name }} - Rp. {{ number_format($item->price_sell, 0, ',', '.') }} | Stok: {{ $item->stock }}
                                                         </span>
-                                                        <button class="btn btn-primary btn-sm" wire:click="addItem({{ $item->id }})">
+                                                        <button class="btn btn-primary btn-sm" wire:click="addItem({{ $item->id_product }})">
                                                             <i class="fas fa-plus"></i> Tambah
                                                         </button>
                                                     </li>

@@ -12,11 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('categories', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
+            $table->unsignedInteger('id_category')->autoIncrement(); // Primary key
+            $table->string('name', 50);
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.

@@ -11,6 +11,7 @@ class UserCreate extends Component
     public $code;
 
     protected $rules = [
+        'id_user',
         'name' =>'required|min:3',
         'email' =>'required|email|unique:users',
         'password' => 'required|min:8|',
@@ -18,27 +19,37 @@ class UserCreate extends Component
 
     public function mount()
     {
-        $this->code = 'US' . str_pad(User::max('id') + 1 , 4 , '0' , STR_PAD_LEFT);
+        $this->code = 'US' . str_pad(User::max('id_user') + 1, 4, '0', STR_PAD_LEFT);
     }
 
     public function save()
     {
-        $validateData = $this->validate();
-        $validateData ['isAdmin'] = 0;
+        // Validate input
+        $this->validate([
+            'name' =>'required|min:3',
+            'email' =>'required|email|unique:users',
+            'password' => 'required|min:8|',
+        ]);
+    
+        // Save user to the database
         User::create([
+            'id_user' => User::max('id_user') + 1, // Auto-increment id_user
             'name' => $this->name,
             'email' => $this->email,
             'password' => bcrypt($this->password),
             'code' => $this->code,
-            'isAdmin' => $validateData['isAdmin']
+            'isAdmin' => 0, // Default value for isAdmin
         ]);
-
-
-        $this->reset(['name','email','password','code']);
-        $this->code = 'US' . str_pad(User::max('id') + 1 , 4 , '0' , STR_PAD_LEFT);
-        toastr()->success( 'Data Berhasl Ditambah!');
+    
+        // Reset the form inputs
+        $this->reset(['name', 'email', 'password']);
+        $this->code = 'US' . str_pad(User::max('id_user') + 1, 4, '0', STR_PAD_LEFT);
+    
+        // Display success message
+        toastr()->success('Data Berhasil Ditambah!');
         return redirect()->route('pengguna.index');
     }
+    
     public function render()
     {
         return view('livewire.user.user-create');

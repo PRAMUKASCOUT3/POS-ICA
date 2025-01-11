@@ -5,17 +5,15 @@
                 <h5 class="card-header bg-primary text-white">Form Tambah Produk</h5>
                 <form wire:submit="save">
                     <input type="text" wire:mode="code" hidden>
-                    <div class="mt-3">
-                        <label for="category_id">Kategori Produk <i class="fas fa-clipboard-list"></i></label>
-                        <select wire:model="category_id" id="category_id" class="form-control">
-                            <option value="">==Pilih Kategori Produk==</option>
-                            @foreach ($category as $item)
-                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                    <div class="form-group">
+                        <label for="category">Kategori</label>
+                        <select wire:model="id_category" id="category" class="form-control">
+                            <option value="">-- Pilih Kategori --</option>
+                            @foreach ($category as $cat)
+                                <option value="{{ $cat->id_category }}">{{ $cat->name }}</option>
                             @endforeach
                         </select>
-                        @error('category_id')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
+                        @error('id_category') <span class="text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="mt-3">
                         <label for="name">Nama Produk <i class="fas fa-file-signature"></i></label>

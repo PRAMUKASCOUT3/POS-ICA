@@ -11,9 +11,13 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $table = 'products';
+    protected $table = 'products'; // Nama tabel
+    protected $primaryKey = 'id_product'; // Primary key
+    public $incrementing = true; // Auto-increment
+    protected $keyType = 'int'; // Tipe data primary key
+
     protected $fillable = [
-        'category_id',
+        'id_category',
         'code',
         'name',
         'price',
@@ -24,9 +28,9 @@ class Product extends Model
         'unit',
     ];
 
-    public function category():BelongsTo
+    public function category()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class, 'id_category', 'id_category'); // Pastikan foreign key benar
     }
 
     protected static function boot()

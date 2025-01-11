@@ -12,10 +12,14 @@ class Transaction extends Model
     use HasFactory;
 
     protected $table = 'transactions';
+    protected $primaryKey = 'id_cashier'; // Primary key
+    public $incrementing = true; // Auto-increment
+    protected $keyType = 'int'; // Tipe data primary key
+
     protected $fillable = [
         'code',
-        'user_id',
-        'product_id',
+        'id_user',
+        'id_product',
         'date',
         'total_item',
         'subtotal',
@@ -23,19 +27,19 @@ class Transaction extends Model
         'status',
     ];
 
-    public function user():BelongsTo
+    public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'id_user', 'id_user'); // Pastikan foreign key benar
     }
 
-    public function product(): BelongsTo
+    public function product()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Product::class, 'id_product', 'id_product'); // Pastikan foreign key benar
     }
 
-    public function expenditure(): BelongsTo
+    public function expenditure()
     {
-        return $this->belongsTo(Expenditure::class);
+        return $this->belongsTo(Expenditure::class, 'id_expenditure', 'id_expenditure'); // Pastikan foreign key benar
     }
     
 }

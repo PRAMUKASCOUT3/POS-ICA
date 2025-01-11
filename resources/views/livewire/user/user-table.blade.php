@@ -2,8 +2,7 @@
     <div class="container">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Data Pengguna / Kasir <i class="fas fa-users"></i>
-                </h5>
+                <h5 class="card-title">Data Pengguna / Kasir <i class="fas fa-users"></i></h5>
                 <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#createSupplierModal"><i
                         class="fas fa-plus"></i> Tambah Pengguna</button>
             </div>
@@ -28,23 +27,22 @@
                                     <td>{{ $user->email }}</td>
                                     <td>
                                         <div class="d-flex justify-content-center">
-
-                                            <a href="{{ route('pengguna.edit', $user->id) }}"
-                                                class="btn btn-info btn-sm me-2 ">Edit</a>
-                                                <form id="deleteForm{{ $user->id }}" class="d-inline"
-                                                    action="{{ route('pengguna.delete', $user->id) }}" method="post">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button type="button" class="btn btn-danger btn-sm"
-                                                        onclick="confirmDelete({{ $user->id }})">Hapus</button>
-                                                </form>
+                                            <a href="{{ route('pengguna.edit', $user->id_user) }}"
+                                                class="btn btn-info btn-sm me-2">Edit</a>
+                                            <form id="deleteForm{{ $user->id_user }}" class="d-inline"
+                                                action="{{ route('pengguna.delete', $user->id_user) }}" method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button type="button" class="btn btn-danger btn-sm"
+                                                    onclick="confirmDelete({{ $user->id_user }})">Hapus</button>
+                                            </form>
                                         </div>
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
-
+    
                     <div class="modal fade" id="createSupplierModal">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -56,5 +54,6 @@
             </div>
         </div>
     </div>
+    
   
 </div>

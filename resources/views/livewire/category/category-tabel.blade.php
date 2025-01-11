@@ -20,14 +20,14 @@
                                     <td>
                                         <div class="d-flex justify-content-center">
 
-                                            <a href="{{ route('category.edit', $item->id) }}"
+                                            <a href="{{ route('category.edit', $item->id_category) }}"
                                                 class="btn btn-info btn-sm me-2 ">Edit</a>
-                                            <form id="deleteForm{{ $item->id }}" class="d-inline"
-                                                action="{{ route('category.delete', $item->id) }}" method="post">
+                                            <form id="deleteForm{{ $item->id_category }}" class="d-inline"
+                                                action="{{ route('category.delete', $item->id_category) }}" method="post">
                                                 @csrf
                                                 @method('delete')
                                                 <button type="button" class="btn btn-danger btn-sm"
-                                                    onclick="confirmDelete({{ $item->id }})">Hapus</button>
+                                                    onclick="confirmDelete({{ $item->id_category }})">Hapus</button>
                                             </form>
                                         </div>
                                     </td>

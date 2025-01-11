@@ -17,7 +17,7 @@ class ProductSeeder extends Seeder
     {
         DB::table('products')->insert([
             [
-                'category_id' => 1, // Living Room
+                'id_category' => 1, // Living Room
                 'code' => 'LR-001',
                 'name' => 'Modern Sofa',
                 'brand' => 'ComfortPlus',
@@ -27,7 +27,7 @@ class ProductSeeder extends Seeder
                 'unit' => 'pcs',
             ],
             [
-                'category_id' => 1, // Living Room
+                'id_category' => 1, // Living Room
                 'code' => 'LR-002',
                 'name' => 'Coffee Table',
                 'brand' => 'WoodArt',
@@ -37,7 +37,7 @@ class ProductSeeder extends Seeder
                 'unit' => 'pcs',
             ],
             [
-                'category_id' => 1, // Living Room
+                'id_category' => 1, // Living Room
                 'code' => 'LR-003',
                 'name' => 'TV Stand',
                 'brand' => 'MediaPro',
@@ -47,7 +47,7 @@ class ProductSeeder extends Seeder
                 'unit' => 'pcs',
             ],
             [
-                'category_id' => 2, // Bedroom
+                'id_category' => 2, // Bedroom
                 'code' => 'BR-001',
                 'name' => 'King Size Bed',
                 'brand' => 'DreamWell',
@@ -57,7 +57,7 @@ class ProductSeeder extends Seeder
                 'unit' => 'pcs',
             ],
             [
-                'category_id' => 2, // Bedroom
+                'id_category' => 2, // Bedroom
                 'code' => 'BR-002',
                 'name' => 'Wardrobe 3 Doors',
                 'brand' => 'ClosetPro',
@@ -67,7 +67,7 @@ class ProductSeeder extends Seeder
                 'unit' => 'pcs',
             ],
             [
-                'category_id' => 2, // Bedroom
+                'id_category' => 2, // Bedroom
                 'code' => 'BR-003',
                 'name' => 'Nightstand',
                 'brand' => 'CozyCorner',
@@ -77,7 +77,7 @@ class ProductSeeder extends Seeder
                 'unit' => 'pcs',
             ],
             [
-                'category_id' => 3, // Dining Room
+                'id_category' => 3, // Dining Room
                 'code' => 'DR-001',
                 'name' => 'Dining Table Set',
                 'brand' => 'TableMaster',
@@ -87,7 +87,7 @@ class ProductSeeder extends Seeder
                 'unit' => 'set',
             ],
             [
-                'category_id' => 3, // Dining Room
+                'id_category' => 3, // Dining Room
                 'code' => 'DR-002',
                 'name' => 'Dining Chair',
                 'brand' => 'ChairArt',
@@ -97,7 +97,7 @@ class ProductSeeder extends Seeder
                 'unit' => 'pcs',
             ],
             [
-                'category_id' => 3, // Dining Room
+                'id_category' => 3, // Dining Room
                 'code' => 'DR-003',
                 'name' => 'Buffet Table',
                 'brand' => 'ServeEase',
@@ -107,7 +107,7 @@ class ProductSeeder extends Seeder
                 'unit' => 'pcs',
             ],
             [
-                'category_id' => 4, // Office
+                'id_category' => 4, // Office
                 'code' => 'OF-001',
                 'name' => 'Ergonomic Chair',
                 'brand' => 'OfficeEase',
@@ -117,7 +117,7 @@ class ProductSeeder extends Seeder
                 'unit' => 'pcs',
             ],
             [
-                'category_id' => 4, // Office
+                'id_category' => 4, // Office
                 'code' => 'OF-002',
                 'name' => 'Office Desk',
                 'brand' => 'DeskPro',
@@ -127,7 +127,7 @@ class ProductSeeder extends Seeder
                 'unit' => 'pcs',
             ],
             [
-                'category_id' => 5, // Outdoor
+                'id_category' => 5, // Outdoor
                 'code' => 'OD-001',
                 'name' => 'Garden Bench',
                 'brand' => 'NatureTouch',
@@ -137,7 +137,7 @@ class ProductSeeder extends Seeder
                 'unit' => 'pcs',
             ],
             [
-                'category_id' => 5, // Outdoor
+                'id_category' => 5, // Outdoor
                 'code' => 'OD-002',
                 'name' => 'Patio Set',
                 'brand' => 'SunsetEase',
@@ -147,7 +147,7 @@ class ProductSeeder extends Seeder
                 'unit' => 'set',
             ],
             [
-                'category_id' => 6, // Kitchen
+                'id_category' => 6, // Kitchen
                 'code' => 'KT-001',
                 'name' => 'Kitchen Cabinet',
                 'brand' => 'CabinetPro',
@@ -157,7 +157,7 @@ class ProductSeeder extends Seeder
                 'unit' => 'pcs',
             ],
             [
-                'category_id' => 6, // Kitchen
+                'id_category' => 6, // Kitchen
                 'code' => 'KT-002',
                 'name' => 'Bar Stool',
                 'brand' => 'StoolArt',
@@ -167,7 +167,7 @@ class ProductSeeder extends Seeder
                 'unit' => 'pcs',
             ],
             [
-                'category_id' => 7, // Storage
+                'id_category' => 7, // Storage
                 'code' => 'ST-001',
                 'name' => 'Bookshelf',
                 'brand' => 'BookHaven',
@@ -177,7 +177,7 @@ class ProductSeeder extends Seeder
                 'unit' => 'pcs',
             ],
             [
-                'category_id' => 7, // Storage
+                'id_category' => 7, // Storage
                 'code' => 'ST-002',
                 'name' => 'Storage Box',
                 'brand' => 'OrganizePro',
@@ -187,7 +187,7 @@ class ProductSeeder extends Seeder
                 'unit' => 'pcs',
             ],
             [
-                'category_id' => 8, // Kids Room
+                'id_category' => 8, // Kids Room
                 'code' => 'KR-001',
                 'name' => 'Kids Study Desk',
                 'brand' => 'LearnFun',
@@ -197,7 +197,7 @@ class ProductSeeder extends Seeder
                 'unit' => 'pcs',
             ],
             [
-                'category_id' => 8, // Kids Room
+                'id_category' => 8, // Kids Room
                 'code' => 'KR-002',
                 'name' => 'Toy Organizer',
                 'brand' => 'ToyTidy',
