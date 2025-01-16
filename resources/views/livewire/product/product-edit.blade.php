@@ -2,7 +2,7 @@
     <div class="container">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-header bg-primary text-white">Form Edit Produk</h5>
+                <h5 class="card-header bg-primary text-white">Data Lama</h5>
                 <form wire:submit="update">
                     <input type="text" wire:mode="code" hidden>
                     <div class="mt-3">

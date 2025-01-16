@@ -8,7 +8,7 @@
                     </div>
                     <div class="card-body">
                         <div class="md-3">
-                            <label for="">Nama suppliers <i class="fas fa-file-signature"></i></label>
+                            <label for="">Nama Supplier <i class="fas fa-file-signature"></i></label>
                             <input type="text" class="form-control"  value="{{ $suppliers->name }}" readonly>
                         </div>
                         <div class="md-3">

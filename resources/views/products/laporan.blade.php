@@ -30,24 +30,15 @@
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->brand }}</td>
                                 @if ($item->stock == 0)
-                                    <span class="badge bg-danger text-white">Stock Habis</span>
+                                    <td><span class="badge bg-danger text-white">Stock Habis</span></td>
                                 @else
                                     @php
-                                        // Calculate total items sold for this product
-                                        $total_sold = $item->transaction->sum('total_item'); // Using the 'transaction' relationship
-                                        // Calculate the original stock
+                                        $total_sold = $item->transaction ? $item->transaction->sum('total_item') : 0;
                                         $original_stock = $item->stock + $total_sold;
-
-                                        $origin_price_buy = $original_stock * $item->price_buy;
                                     @endphp
                                     <td>{{ $original_stock }}</td>
                                 @endif
                                 @php
-                                    // Calculate total items sold for this product
-                                    $total_sold = $item->transaction->sum('total_item'); // Using the 'transaction' relationship
-                                    // Calculate the original stock
-                                    $original_stock = $item->stock + $total_sold;
-
                                     $origin_price_buy = $original_stock * $item->price_buy;
                                     $origin_price_sell = $original_stock * $item->price_sell;
                                 @endphp
@@ -57,6 +48,7 @@
                             </tr>
                         @endforeach
                     </tbody>
+                    
                     @php
                         $total_buy = 0;
                         $total_sell = 0;

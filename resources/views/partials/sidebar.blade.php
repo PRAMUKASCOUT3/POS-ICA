@@ -71,7 +71,7 @@
                                 <a href="{{ route('expenditures.index') }}">Pengeluaran</a>
                             </li>
                             <li class="submenu-item ">
-                                <a href="{{ route('cashier.index') }}">Kasir</a>
+                                <a href="{{ route('cashier.index') }}">Transaksi</a>
                             </li>
                             <li class="submenu-item ">
                                 <a href="{{ route('cashier.riwayat') }}">Riwayat Transaksi</a>

@@ -6,16 +6,18 @@
                 <div>
                     <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#createSupplierModal"><i
                             class="fas fa-plus"></i> Tambah Kategori</button>
-                    <table class="table">
+                    <table id="example" class="table">
                         <thead>
                             <tr>
+                                <th>No</th>
                                 <th>Nama Kategori <i class="fas fa-file-signature"></i></th>
                                 <th>Aksi <i class="fas fa-cogs"></i></th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($categories as $item)
+                            @foreach ($categories as $no => $item)
                                 <tr>
+                                    <td>{{ ++ $no }}</td>
                                     <td>{{ $item->name }}</td>
                                     <td>
                                         <div class="d-flex justify-content-center">

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->unsignedInteger('id_cashier')->autoIncrement();
-            $table->string('code',8);
+            $table->string('code',25);
             $table->unsignedInteger('id_user')->nullable(); // Pastikan menggunakan unsignedInteger
             $table->foreign('id_user')
                 ->references('id_user')
@@ -24,7 +24,7 @@ return new class extends Migration
                 ->references('id_product')
                 ->on('products')
                 ->cascadeOnDelete();
-            $table->string('date',10);
+            $table->string('date',25);
             $table->string('total_item',15);
             $table->decimal('subtotal', 10, 2);
             $table->decimal('amount_paid', 10, 2);

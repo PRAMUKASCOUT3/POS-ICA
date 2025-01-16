@@ -2,10 +2,10 @@
     <div class="container">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-header bg-primary text-white">Form Tambah Produk</h5>
+                <h5 class="card-header bg-primary text-white">Data Baru</h5>
                 <form wire:submit="save">
                     <input type="text" wire:mode="code" hidden>
-                    <div class="form-group">
+                    <div class="form-group mt-3">
                         <label for="category">Kategori</label>
                         <select wire:model="id_category" id="category" class="form-control">
                             <option value="">-- Pilih Kategori --</option>
@@ -69,7 +69,7 @@
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
-                    <button type="submit" class="btn btn-primary mt-2">Submit</button>
+                    <button type="submit" class="btn btn-primary mt-2">Simpan</button>
                 </form>
             </div>
         </div>

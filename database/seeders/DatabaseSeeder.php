@@ -30,9 +30,9 @@ class DatabaseSeeder extends Seeder
                 'isAdmin' => 2
             ],
             [
-                'name' => 'User',
+                'name' => 'Kasir',
                 'code' => '12345678',
-                'email' => 'user@gmail.com',
+                'email' => 'kasir@gmail.com',
                 'password' => Hash::make('password'),
                 'isAdmin' => 0
             ],

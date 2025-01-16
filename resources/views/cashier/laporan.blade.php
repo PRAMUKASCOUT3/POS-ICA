@@ -42,9 +42,10 @@
                 <!-- Transaction report table -->
                 <h5 class="card-title">Laporan Transaksi</h5>
                 <div class="table-responsive">
-                    <table class="table table-bordered">
+                    <table id="example" class="table table-bordered">
                         <thead>
                             <tr>
+                                <th>No</th>
                                 <th>Nama Kasir <i class="fas fa-user"></i></th>
                                 <th>Kode Transaksi <i class="fas fa-code"></i></th>
                                 <th>Tanggal <i class="fas fa-calendar-alt"></i></th>
@@ -57,10 +58,12 @@
                         </thead>
                         <tbody>
                             @php
+                            $no = 0;
                                 $groupedCashier = $cashier->groupBy('code');
                             @endphp
                             @foreach ($groupedCashier as $code => $items)
                                 <tr>
+                                    <td>{{ ++ $no }}</td>
                                     <td rowspan="{{ $items->count() }}">{{ $items->first()->user->name }}</td>
                                     <td rowspan="{{ $items->count() }}">{{ $code }}</td>
                                     <td rowspan="{{ $items->count() }}">{{ $items->first()->date }}</td>
@@ -107,36 +110,6 @@
                         </tfoot>
                         
                     </table>
-                </div>
-
-
-                <!-- Pagination -->
-                <div class="flex items-center justify-between p-4 border-t border-blue-gray-50">
-                    <p class="block text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                        Page {{ $cashier->currentPage() }} of {{ $cashier->lastPage() }}
-                    </p>
-                    <div class="flex gap-2">
-                        @if ($cashier->onFirstPage())
-                            <button
-                                class="select-none rounded-lg border py-2 px-4 text-xs font-bold text-gray-900 opacity-50 cursor-not-allowed"
-                                disabled>Previous</button>
-                        @else
-                            <a href="{{ $cashier->previousPageUrl() }}">
-                                <button
-                                    class="select-none rounded-lg border py-2 px-4 text-xs font-bold text-gray-900">Previous</button>
-                            </a>
-                        @endif
-                        @if ($cashier->hasMorePages())
-                            <a href="{{ $cashier->nextPageUrl() }}">
-                                <button
-                                    class="select-none rounded-lg border py-2 px-4 text-xs font-bold text-gray-900">Next</button>
-                            </a>
-                        @else
-                            <button
-                                class="select-none rounded-lg border py-2 px-4 text-xs font-bold text-gray-900 opacity-50 cursor-not-allowed"
-                                disabled>Next</button>
-                        @endif
-                    </div>
                 </div>
             </div>
 

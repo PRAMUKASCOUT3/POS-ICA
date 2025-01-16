@@ -1,6 +1,6 @@
 <div>
     <div class="modal-header bg-primary">
-        <h4 class="modal-title text-white">Form Tambah Data Supplier</h4>
+        <h4 class="modal-title text-white">Data Baru</h4>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
     </div>
 
@@ -21,7 +21,7 @@
                 <input type="text" class="form-control" wire:model="address" required>
                 @error('address') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
-            <button type="submit" class="btn btn-primary mt-2">Submit</button>
+            <button type="submit" class="btn btn-primary mt-2">Simpan</button>
         </form>
     </div>
 </div>

@@ -9,6 +9,7 @@
                     <table id="example" class="table">
                         <thead>
                             <tr>
+                                <th>No</th>
                                 <th>Nama <i class="fas fa-file-signature"></i></th>
                                 <th>Nomor HP <i class="fas fa-phone"></i></th>
                                 <th>Alamat <i class="fas fa-map-marked-alt"></i></th>
@@ -16,8 +17,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($suppliers as $supplier)
+                            @foreach ($suppliers as $no => $supplier)
                                 <tr>
+                                    <td>{{ ++ $no }}</td>
                                     <td>{{ $supplier->name }}</td>
                                     <td>{{ $supplier->contact_person }}</td>
                                     <td>{{ $supplier->address }}</td>
