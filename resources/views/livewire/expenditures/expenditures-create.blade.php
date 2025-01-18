@@ -1,6 +1,6 @@
 <div>
     <div class="modal-header bg-primary">
-        <h4 class="modal-title text-white">Form Tambah Data Pengeluaran</h4>
+        <h4 class="modal-title text-white">Data Baru</h4>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
     </div>
 

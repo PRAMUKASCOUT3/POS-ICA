@@ -3,7 +3,8 @@
         <div class="sidebar-header">
             <div class="d-flex justify-content-between">
                 <div class="logo">
-                    <h5 style="font-family: 'Times New Roman'">MEUBEL LE'KOYO <li class="fas fa-home"></li></h5>
+                    <h5 style="font-family: 'Times New Roman'">MEUBEL LE'KOYO <li class="fas fa-home"></li>
+                    </h5>
                 </div>
                 <div class="toggler">
                     <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
@@ -50,13 +51,14 @@
                                 <a href="{{ route('pengguna.index') }}">Data Pengguna</a>
                             </li>
                             <li class="submenu-item ">
-                                <a href="{{ route('supplier.index') }}">Data Supplier</a>
+                                <a href="{{ route('product.index') }}">Data Produk</a>
                             </li>
                             <li class="submenu-item ">
                                 <a href="{{ route('category.index') }}">Data Kategori</a>
                             </li>
+
                             <li class="submenu-item ">
-                                <a href="{{ route('product.index') }}">Data Produk</a>
+                                <a href="{{ route('supplier.index') }}">Data Supplier</a>
                             </li>
                         </ul>
                     </li>

@@ -4,6 +4,7 @@ namespace App\Exports;
 
 use App\Models\Cashier;
 use App\Models\Expenditure;
+use App\Models\Transaction;
 use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithEvents;
@@ -27,7 +28,7 @@ class CashiersExport implements FromCollection, WithHeadings, WithMapping, WithS
     public function collection()
     {
         // Ambil transaksi berdasarkan filter tanggal
-        $cashiers = Cashier::with('user', 'product')
+        $cashiers = Transaction::with('user', 'product')
             ->when($this->start_date && $this->end_date, function ($query) {
                 $query->whereBetween('date', [$this->start_date, $this->end_date]);
             })

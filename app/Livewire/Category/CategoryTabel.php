@@ -12,7 +12,7 @@ class CategoryTabel extends Component
 
     public function mount()
     {
-        $this->categories = Category::all();
+        $this->categories = Category::orderBy('created_at','desc')->get();
     }
     public function render()
     {

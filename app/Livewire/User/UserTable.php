@@ -13,7 +13,7 @@ class UserTable extends Component
 
     public function mount()
     {
-        $this->user = User::where('isAdmin', 0 )->get();
+        $this->user = User::where('isAdmin', 0 )->orderBy('created_at','desc')->get();
     }
     public function render()
     {

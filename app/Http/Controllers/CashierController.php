@@ -14,7 +14,8 @@ class CashierController extends Controller
 {
     public function index()
     {
-        return view('cashier.index');
+        $cashier = Transaction::all();
+        return view('cashier.index', compact('cashier'));
     }
     public function print()
     {
@@ -22,14 +23,25 @@ class CashierController extends Controller
         return view('cashier.print', compact('cashier'));
     }
 
+
+
     public function history()
     {
-        // Mengambil data transaksi dengan paginasi
         $cashier = Transaction::where('id_user', Auth::id())
-            ->with('product') // Include relasi dengan produk
+            ->with('product') // Ensure the relationship is loaded
             ->orderBy('created_at', 'desc')
-            ->paginate(10); // Menggunakan paginate
+            ->get()
+            ->groupBy('code'); // Group by Kode Transaksi
+    
         return view('cashier.history', compact('cashier'));
+    }
+    
+
+
+    public function show($code)
+    {
+        $cashier = Transaction::where('code', $code)->with('product')->get();
+        return view('cashier.detail', compact('cashier'));
     }
 
     public function report(Request $request)
@@ -41,7 +53,10 @@ class CashierController extends Controller
         // Filter data kasir berdasarkan tanggal
         $cashier = Transaction::when($start_date && $end_date, function ($query) use ($start_date, $end_date) {
             $query->whereBetween('date', [$start_date, $end_date]);
-        })->paginate(10);
+        })->with('product') // Ensure the relationship is loaded
+        ->orderBy('created_at', 'desc')
+        ->get()
+        ->groupBy('code'); 
 
         // Filter data pengeluaran berdasarkan tanggal
         $expenditure = Expenditure::when($start_date && $end_date, function ($query) use ($start_date, $end_date) {
@@ -49,7 +64,8 @@ class CashierController extends Controller
         })->get();
 
         // Total pendapatan dan pengeluaran
-        $total_pendapatan = $cashier->sum('subtotal');
+        $subtotal = Transaction::all();
+        $total_pendapatan = $subtotal->sum('subtotal');
         $pengeluaran = $expenditure->sum('nominal');
         $total_semua = $total_pendapatan - $pengeluaran;
 
@@ -108,9 +124,8 @@ class CashierController extends Controller
         // Mengambil filter tanggal dari request
         $start_date = $request->input('start_date');
         $end_date = $request->input('end_date');
-    
+
         // Passing parameter filter ke CashiersExport
         return Excel::download(new CashiersExport($start_date, $end_date), 'laporan_transaksi.xlsx');
     }
-    
 }

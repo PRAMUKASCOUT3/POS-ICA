@@ -55,15 +55,7 @@
                         <select class="form-control" id="unit" wire:model="unit">
                             <option value="">==Pilih Satuan Barang==</option>
                             <option value="Pcs (Pieces)">Pcs (Pieces)</option>
-                            <option value="Kg (Kilogram)">Kg (Kilogram)</option>
-                            <option value="L (Liter)">L (Liter)</option>
-                            <option value="Dus (Box)">Dus (Box)</option>
-                            <option value="Meter">Meter</option>
-                            <option value="Pack">Pack</option>
-                            <option value="Lusin">Lusin (Dozen)</option>
-                            <option value="Gram">Gram</option>
-                            <option value="Kodi">Kodi</option>
-                            <option value="Gross">Gross</option>
+                            <option value="Set">Set</option>
                         </select>
                         @error('unit')
                             <span class="text-danger">{{ $message }}</span>

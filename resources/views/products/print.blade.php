@@ -8,101 +8,69 @@
     <title>{{ $title }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            /* padding: 20px; */
-        }
-
-        .container {
-            margin-top: 10px;
-        }
-
-        /* .card {
-            border: 1px solid #dee2e6;
-            border-radius: 0.5rem;
-        } */
-
-        .card-header {
-            background-color: white;
-            color: black;
-            padding: 1.5rem;
-            border-bottom: 1px solid #dee2e6;
-            text-align: center;
-        }
-
-        .card-header h2 {
-            font-size: 1.8rem;
-            font-weight: bold;
-            margin: 0;
-        }
-
-        .table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .table th,
-        .table td {
-            padding: 0.5rem;
-            vertical-align: middle;
-            border: 1px solid #dee2e6;
-            word-wrap: break-word;
-        }
-
-        .table th {
-            background-color: #f8f9fa;
-            color: black;
-            text-align: center;
-        }
-
-        .table-striped tbody tr:nth-of-type(odd) {
-            background-color: rgba(0, 123, 255, 0.1);
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        /* Mengatur lebar kolom secara proporsional */
-        th:nth-child(1), td:nth-child(1) {
-            width: 5%;
-        }
-
-        th:nth-child(2), td:nth-child(2) {
-            width: 10%;
-        }
-
-        th:nth-child(3), td:nth-child(3) {
-            width: 15%;
-        }
-
-        th:nth-child(4), td:nth-child(4) {
-            width: 20%;
-        }
-
-        th:nth-child(5), td:nth-child(5) {
-            width: 15%;
-        }
-
-        th:nth-child(6), td:nth-child(6) {
-            width: 10%;
-        }
-
-        th:nth-child(7), td:nth-child(7) {
-            width: 10%;
-        }
-
-        th:nth-child(8), td:nth-child(8) {
-            width: 10%;
-        }
-
-        .signature {
-            margin-top: 2rem;
-            text-align: right;
-        }
-    </style>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                font-size: 12px;
+            }
+    
+            .container {
+                margin: 20px auto;
+                padding: 20px;
+                background-color: #fff;
+                border-radius: 5px;
+                border: 1px solid #ddd;
+            }
+    
+            .card-header {
+                background-color: #007bff;
+                color: white;
+                padding: 10px;
+                border-radius: 5px;
+                text-align: center;
+                font-size: 18px;
+            }
+    
+            .table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 20px;
+            }
+    
+            .table th,
+            .table td {
+                border: 1px solid #dee2e6;
+                padding: 8px;
+                text-align: center;
+                vertical-align: middle;
+            }
+    
+            .table th {
+                background-color: #f8f9fa;
+                font-weight: bold;
+            }
+    
+            .tfoot td {
+                font-weight: bold;
+                background-color: #f1f1f1;
+            }
+    
+            .signature {
+                margin-top: 30px;
+                text-align: right;
+            }
+    
+            .signature span {
+                display: inline-block;
+            }
+    
+            .signature u {
+                margin-top: 30px;
+                display: block;
+                font-weight: bold;
+            }
+        </style>
+        
 </head>
 
 <body>
@@ -139,7 +107,7 @@
                                 @else
                                     @php
                                         // Calculate total items sold for this product
-                                        $total_sold = $item->cashiers->sum('total_item'); // Using the 'cashiers' relationship
+                                        $total_sold = $item->transaction->sum('total_item'); // Using the 'transaction' relationship
                                         // Calculate the original stock
                                         $original_stock = $item->stock + $total_sold;
 
@@ -149,7 +117,7 @@
                                 @endif
                                 @php
                                 // Calculate total items sold for this product
-                                $total_sold = $item->cashiers->sum('total_item'); // Using the 'cashiers' relationship
+                                $total_sold = $item->transaction->sum('total_item'); // Using the 'transaction' relationship
                                 // Calculate the original stock
                                 $original_stock = $item->stock + $total_sold;
 
@@ -167,7 +135,7 @@
                         $total_sell = 0;
 
                         foreach ($products as $product) {
-                            $total_sold = $product->cashiers->sum('total_item'); // Using the 'cashiers' relationship
+                            $total_sold = $product->transaction->sum('total_item'); // Using the 'transaction' relationship
                                 // Calculate the original stock
                                 $original_stock = $product->stock + $total_sold;
                             $total_buy += $original_stock * $product->price_buy;

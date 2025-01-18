@@ -13,7 +13,7 @@ class SupplierTabel extends Component
     protected $listeners = ['DeleteUser' => 'render'];
     public function mount()
     {
-        $this->suppliers = Supplier::all();
+        $this->suppliers = Supplier::orderBy('created_at', 'desc')->get();
     }
     public function render()
     {

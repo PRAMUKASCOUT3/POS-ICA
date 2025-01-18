@@ -11,7 +11,7 @@ class ProductTabel extends Component
     protected $listeners = ['DeleteProduct' => 'render'];
     public function mount()
     {
-        $this->products = Product::all();
+        $this->products = Product::orderBy('created_at','desc')->latest()->get();
     }
     public function render()
     {

@@ -19,7 +19,7 @@ class UsersExport implements FromCollection, WithHeadings, WithMapping, WithStyl
      */
     public function collection()
     {
-        return User::select('id', 'code', 'name', 'email')->where('isAdmin', 0)->get();
+        return User::select('id_user', 'code', 'name', 'email')->where('isAdmin', 0)->get();
     }
 
     public function headings(): array

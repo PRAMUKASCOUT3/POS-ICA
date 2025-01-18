@@ -99,7 +99,7 @@
                         </div>
                         <div class="card-body pb-0">
                             <div class="mb-4 mt-2">
-                                <h1>Rp {{$total_semua}}</h1>
+                                <h1>Rp. {{ number_format($total_semua,'0')}}</h1>
                             </div>
                         </div>
                     </div>
