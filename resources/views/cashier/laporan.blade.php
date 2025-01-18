@@ -42,7 +42,7 @@
                 <!-- Transaction report table -->
                 <h5 class="card-title">Laporan Transaksi</h5>
                 <div class="table-responsive">
-                    <table class="table table-bordered">
+                    <table id="example" class="table table-bordered">
                         <thead>
                             <tr>
                                 <th>No</th>
