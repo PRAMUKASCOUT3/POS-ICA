@@ -69,7 +69,7 @@
                                 <table class="table table-bordered mt-4">
                                     <thead>
                                         <tr>
-                                            <th>Nama Barang <i class="fas fa-file-signature"></i></th>
+                                            <th>Nama Produk <i class="fas fa-file-signature"></i></th>
                                             <th>Jumlah <i class="fab fa-unity"></i></th>
                                             <th>Harga <i class="fas fa-dollar-sign"></i></th>
                                             <th>Total <i class="fas fa-funnel-dollar"></i></th>
