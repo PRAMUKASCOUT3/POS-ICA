@@ -133,7 +133,7 @@
                             <td colspan="2"></td>
                         </tr>
                         <tr>
-                            <td colspan="5" class="text-end">Total Keseluruhan</td>
+                            <td colspan="5" class="text-end">Total Penjualan Bersih</td>
                             <td>Rp. {{ number_format($total_keseluruhan, 2, ',', '.') }}</td>
                             <td colspan="2"></td>
                         </tr>

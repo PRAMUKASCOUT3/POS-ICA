@@ -134,7 +134,7 @@ class CashiersExport implements FromCollection, WithHeadings, WithMapping, WithS
                 $sheet->setCellValue("G{$last_row}", 'Rp ' . number_format($this->total_pengeluaran, 0, ',', '.'));
 
                 $last_row++;
-                $sheet->setCellValue("A{$last_row}", 'Total Keseluruhan');
+                $sheet->setCellValue("A{$last_row}", 'Total Penjualan Bersih');
                 $sheet->setCellValue("G{$last_row}", 'Rp ' . number_format($this->total_keseluruhan, 0, ',', '.'));
 
                 // Tambahkan gaya untuk ringkasan
