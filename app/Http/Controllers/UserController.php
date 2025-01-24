@@ -23,6 +23,38 @@ class UserController extends Controller
         return view('user.edit', compact('user'));
     }
 
+    public function show($id)
+    {
+        $user = User::find($id);
+        return view('user.detail', compact('user'));
+    }
+
+    public function update(Request $request, $id)
+{
+    $user = User::findOrFail($id); // Laravel akan mencari berdasarkan id_user
+
+    $request->validate([
+        'name' => 'required|string|max:30',
+        'email' => 'nullable|email|max:50|unique:users,email,' . $id . ',id_user', // Validasi email
+        'password' => 'nullable|min:8',
+    ]);
+
+    // Update data user
+    $user->name = $request->input('name');
+    $user->email = $request->input('email');
+
+    if ($request->filled('password')) {
+        $user->password = bcrypt($request->input('password'));
+    }
+
+    $user->save();
+
+    return redirect()->back()->with('success', 'Profile updated successfully.');
+}
+
+    
+
+
     public function dashboard()
     {
         $completedPercentages = [];
@@ -91,7 +123,7 @@ class UserController extends Controller
         return $pdf->download('Laporan_Pengguna_Kasir.pdf');
     }
 
-    public function export() 
+    public function export()
     {
         return Excel::download(new UsersExport, 'users.xlsx');
     }
@@ -101,5 +133,4 @@ class UserController extends Controller
         User::find($id)->delete();
         return redirect()->route('pengguna.index')->with('success', 'Data Berhasil Dihapus');
     }
-    
 }

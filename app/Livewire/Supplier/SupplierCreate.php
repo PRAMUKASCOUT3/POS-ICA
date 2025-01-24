@@ -11,9 +11,9 @@ class SupplierCreate extends Component
     public $name, $contact_person, $address;
 
     protected $rules = [
-        'name' => 'required|string',
-        'contact_person' => 'required|string',
-        'address' => 'required|string',
+        'name' => 'required|string|max:30',
+        'contact_person' => 'required|string|max:15',
+        'address' => 'required|string|min:5',
     ];
 
     public function save()

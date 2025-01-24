@@ -70,6 +70,14 @@
                                     <li>
                                         <h6 class="dropdown-header">Hello, {{ $user->name }}</h6>
                                     </li>
+                                    @php
+                                        $user = Auth::id();
+                                    @endphp
+                                    @if (Auth::user()->isAdmin == 2)
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('pengguna.show',$user) }}"><i class="fas fa-user-circle"></i> Profil</a>
+                                    </li>
+                                    @endif
                                     <form action="{{ route('logout') }}" method="post">
                                         @csrf
 

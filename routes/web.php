@@ -31,6 +31,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/pengguna/print',[UserController::class,'generatePDF'])->name('pengguna.print');
     Route::get('/user/pengguna/export/', [UserController::class, 'export'])->name('user.excel');
     Route::delete('/admin/pengguna/delete/{id}',[UserController::class, 'delete'])->name('pengguna.delete');
+    Route::get('/admin/profile/{id}',[UserController::class, 'show'])->name('pengguna.show');
+    Route::put('/admin/profile/update/{id}',[UserController::class, 'update'])->name('pengguna.update');
 
     Route::get('/admin/supplier', [SupplierController::class,'index'])->name('supplier.index');
     Route::get('/admin/supplier/{id}/edit',[SupplierController::class, 'edit'])->name('supplier.edit');
