@@ -10,7 +10,7 @@ class CategoryCreate extends Component
     public $name;
 
     protected $rules =[
-        'name' =>'required|string|max:255',
+        'name' =>'required|string|max:50',
     ];
     public function render()
     {

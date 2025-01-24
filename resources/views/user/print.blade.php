@@ -102,11 +102,12 @@
 
                 <div class="signature">
                     @php
+                    $users = Auth::user();
                         $tanggal = \Carbon\Carbon::now()->format('Y-m-d');
                     @endphp
                     <span>{{ $tanggal }}</span>, <span>Jambi</span>
                     <br><br><br><br><br>
-                    <span><u>{{ $user->name }}</u></span>
+                    <span><u>{{ $users->name }}</u></span>
                 </div>
             </div>
         </div>

@@ -18,8 +18,8 @@ class UserEdit extends Component
     public function update()
     {
         $this->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'max:255', 'unique:users,email,' . $this->user_id . ',id_user'],
+            'name' => ['required', 'string', 'max:30'],
+            'email' => ['required', 'email', 'max:50', 'unique:users,email,' . $this->user_id . ',id_user'],
         ]);
 
         $user = User::find($this->user_id);

@@ -14,12 +14,12 @@ class ProductCreate extends Component
     // Rules for validation
     protected $rules = [
         'id_category' => 'required',
-        'name' => 'required|string|max:255',
-        'brand' => 'required|string|max:255',
-        'stock' => 'required|integer',
+        'name' => 'required|string|max:30',
+        'brand' => 'required|string|max:30',
+        'stock' => 'required|integer|max:5',
         'price_buy' => 'required|numeric',
         'price_sell' => 'required|numeric',
-        'unit' => 'required|string',
+        'unit' => 'required|string|max:20',
     ];
 
     public function mount()

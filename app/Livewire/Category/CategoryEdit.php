@@ -25,7 +25,7 @@ class CategoryEdit extends Component
     public function update()
     {
         $this->validate([
-            'name' => 'required',
+            'name' => 'required|string|max:50',
         ]);
 
         $category = Category::find($this->category_id); // Laravel akan menggunakan id_category

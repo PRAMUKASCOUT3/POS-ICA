@@ -37,16 +37,25 @@ class ProductEdit extends Component
 
     public function update()
     {
+        $this->validate([
+            'id_category' => 'required',
+            'name' => 'required|string|max:30',
+            'brand' => 'required|string|max:30',
+            'stock' => 'required|integer',
+            'price_buy' => 'required|numeric',
+            'price_sell' => 'required|numeric',
+            'unit' => 'required|string|max:20',
+        ]);
         // Update data produk
-        $product = Product::find($this->product_id);
-        $product->id_category = $this->id_category;
-        $product->name = $this->name;
-        $product->brand = $this->brand;
-        $product->stock = $this->new_stock; // Gunakan jumlah stok baru
-        $product->price_buy = $this->price_buy;
-        $product->price_sell = $this->price_sell;
-        $product->unit = $this->unit;
-        $product->save();
+        Product::find($this->product_id)->update([
+            'id_category' => $this->id_category,
+            'name' => $this->name,
+            'brand' => $this->brand,
+            'stock' => $this->new_stock,
+            'price_buy' => $this->price_buy,
+            'price_sell' => $this->price_sell,
+            'unit' => $this->unit,
+        ]);
         return redirect()->route('product.index')->with('success','Data Berhasil Diubah');
     }
 

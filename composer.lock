@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1554cf8a122b8fd94e9fac5972603555",
+    "content-hash": "f1c6ca828f0d4614205e36679491bdde",
     "packages": [
         {
             "name": "arielmejiadev/larapex-charts",
@@ -943,6 +943,51 @@
                 "source": "https://github.com/ezyang/htmlpurifier/tree/v4.18.0"
             },
             "time": "2024-11-01T03:51:45+00:00"
+        },
+        {
+            "name": "ferdhika31/laravel-lang-id",
+            "version": "0.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ferdhika31/laravel-lang-id.git",
+                "reference": "41b8cf24ae1d0500bd79b520803ca74ba2b764f7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ferdhika31/laravel-lang-id/zipball/41b8cf24ae1d0500bd79b520803ca74ba2b764f7",
+                "reference": "41b8cf24ae1d0500bd79b520803ca74ba2b764f7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.4"
+            },
+            "type": "language",
+            "autoload": {
+                "psr-4": {
+                    "Ferdhika31\\LaravelLangID\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ferdhika Yudira",
+                    "email": "rpl4rt08@gmail.com"
+                }
+            ],
+            "description": "Indonesian language localization for Laravel 5.4",
+            "keywords": [
+                "indonesian",
+                "laravel",
+                "localization"
+            ],
+            "support": {
+                "issues": "https://github.com/ferdhika31/laravel-lang-id/issues",
+                "source": "https://github.com/ferdhika31/laravel-lang-id/tree/master"
+            },
+            "time": "2018-08-28T03:45:02+00:00"
         },
         {
             "name": "fruitcake/php-cors",

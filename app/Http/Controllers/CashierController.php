@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exports\CashiersExport;
 use App\Models\Transaction;
 use App\Models\Expenditure;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
@@ -32,10 +33,10 @@ class CashierController extends Controller
             ->orderBy('created_at', 'desc')
             ->get()
             ->groupBy('code'); // Group by Kode Transaksi
-    
+
         return view('cashier.history', compact('cashier'));
     }
-    
+
 
 
     public function show($code)
@@ -47,16 +48,16 @@ class CashierController extends Controller
     public function report(Request $request)
     {
         // Mengambil input filter tanggal
-        $start_date = $request->input('start_date');
-        $end_date = $request->input('end_date');
+        $start_date = $request->input('start_date') ? Carbon::parse($request->input('start_date'))->startOfDay() : null;
+        $end_date = $request->input('end_date') ? Carbon::parse($request->input('end_date'))->endOfDay() : null;
 
         // Filter data kasir berdasarkan tanggal
         $cashier = Transaction::when($start_date && $end_date, function ($query) use ($start_date, $end_date) {
             $query->whereBetween('date', [$start_date, $end_date]);
         })->with('product') // Ensure the relationship is loaded
-        ->orderBy('created_at', 'desc')
-        ->get()
-        ->groupBy('code'); 
+            ->orderBy('created_at', 'desc')
+            ->get()
+            ->groupBy('code');
 
         // Filter data pengeluaran berdasarkan tanggal
         $expenditure = Expenditure::when($start_date && $end_date, function ($query) use ($start_date, $end_date) {
@@ -78,9 +79,9 @@ class CashierController extends Controller
 
     public function generatePDF(Request $request)
     {
-        // Mengambil input filter tanggal
-        $start_date = $request->input('start_date');
-        $end_date = $request->input('end_date');
+        // Mengambil input filter tanggal dan mengatur waktu awal/akhir hari
+        $start_date = $request->input('start_date') ? Carbon::parse($request->input('start_date'))->startOfDay() : null;
+        $end_date = $request->input('end_date') ? Carbon::parse($request->input('end_date'))->endOfDay() : null;
 
         // Query untuk transaksi dengan filter tanggal
         $cashier = Transaction::with('product')
@@ -105,8 +106,8 @@ class CashierController extends Controller
             'cashier' => $cashier,
             'expenditure' => $expenditure,
             'user' => Auth::user(),
-            'start_date' => $start_date,
-            'end_date' => $end_date,
+            'start_date' => $start_date ? $start_date->format('Y-m-d') : null,
+            'end_date' => $end_date ? $end_date->format('Y-m-d') : null,
             'total_pendapatan' => $total_pendapatan,
             'total_pengeluaran' => $total_pengeluaran,
             'total_keseluruhan' => $total_keseluruhan,
@@ -122,8 +123,8 @@ class CashierController extends Controller
     public function excel(Request $request)
     {
         // Mengambil filter tanggal dari request
-        $start_date = $request->input('start_date');
-        $end_date = $request->input('end_date');
+        $start_date = $request->input('start_date') ? Carbon::parse($request->input('start_date'))->startOfDay() : null;
+        $end_date = $request->input('end_date') ? Carbon::parse($request->input('end_date'))->endOfDay() : null;
 
         // Passing parameter filter ke CashiersExport
         return Excel::download(new CashiersExport($start_date, $end_date), 'laporan_transaksi.xlsx');

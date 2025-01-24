@@ -10,7 +10,7 @@ class ExpendituresCreate extends Component
     public $date,$description,$nominal;
     protected $rules = [
         'date' => 'required|date',
-        'description' =>'required',
+        'description' =>'required|string',
         'nominal' =>'required|numeric'
     ];
 

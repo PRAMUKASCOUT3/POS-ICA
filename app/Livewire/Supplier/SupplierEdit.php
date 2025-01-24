@@ -30,9 +30,9 @@ class SupplierEdit extends Component
     public function update()
     {
         $this->validate([
-            'name' => 'required|string|max:255',
-            'contact_person' => 'required|string|max:255',
-            'address' => 'required|string|max:255',
+            'name' => 'required|string|max:30',
+            'contact_person' => 'required|string|max:15',
+            'address' => 'required|string|max:150',
         ]);
 
         Supplier::find($this->suppliers_id)->update([

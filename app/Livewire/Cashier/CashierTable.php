@@ -72,52 +72,59 @@ class CashierTable extends Component
             toastr()->error('Keranjang tidak boleh kosong!');
             return;
         }
-
+    
         // Validasi pembayaran
         if ($this->amount_paid < $this->subtotal) {
-            toastr()->error('Masukan Nominal Pembayaran!');
+            toastr()->error('Masukkan nominal pembayaran yang cukup!');
             return;
         }
-
-        // Loop over the items and create a transaction for each
+    
+        // Validasi stok untuk semua produk di keranjang
+        foreach ($this->items as $item) {
+            $product = Product::find($item['id_product']);
+    
+            if ($product->stock < $item['stock']) {
+                toastr()->error("Stok produk '{$product->name}' tidak mencukupi! Tersedia: {$product->stock}, diminta: {$item['stock']}.");
+                return;
+            }
+        }
+    
+        // Jika semua stok mencukupi, lanjutkan menyimpan transaksi
         foreach ($this->items as $item) {
             $transaction = Transaction::create([
                 'code' => 'TRX-' . now()->timestamp, // Kode transaksi unik
-                'id_user' => Auth::id(), // Get the current authenticated user ID
-                'id_product' => $item['id_product'], // Get product ID from the item
-                'date' => now()->toDateTimeString(), // Using current date and time
-                'total_item' => $item['stock'], // Total quantity of the product
-                'subtotal' => $item['price_sell'] * $item['stock'], // Calculate subtotal per item
-                'amount_paid' => $this->amount_paid, // Payment amount
-                'status' => 'completed', // Transaction status
+                'id_user' => Auth::id(), // ID pengguna yang melakukan transaksi
+                'id_product' => $item['id_product'], // ID produk
+                'date' => now()->toDateTimeString(), // Tanggal dan waktu transaksi
+                'total_item' => $item['stock'], // Jumlah produk
+                'subtotal' => $item['price_sell'] * $item['stock'], // Subtotal untuk produk ini
+                'amount_paid' => $this->amount_paid, // Total pembayaran
+                'status' => 'completed', // Status transaksi
             ]);
-
-            // Update product stock
+    
+            // Kurangi stok produk
             $product = Product::find($item['id_product']);
-            if ($product->stock >= $item['stock']) {
-                $product->stock -= $item['stock'];
-                $product->save();
-            } else {
-                throw new \Exception('Stok tidak cukup untuk produk: ' . $product->name);
-            }
+            $product->stock -= $item['stock'];
+            $product->save();
         }
-
-        // Menyimpan detail transaksi dalam sesi untuk pencetakan
+    
+        // Simpan detail transaksi untuk cetak
         session(['transaction' => [
             'items' => $this->items,
             'subtotal' => $this->subtotal,
             'amount_paid' => $this->amount_paid,
             'change' => $this->amount_paid - $this->subtotal,
         ]]);
-
-        toastr()->success('Transaksi Berhasil!');
-
-        // Reset form
+    
+        toastr()->success('Transaksi berhasil!');
+    
+        // Reset keranjang dan form pembayaran
         $this->reset(['items', 'subtotal', 'amount_paid']);
-
+    
         // Redirect ke halaman cetak
         return redirect()->route('cashier.print');
     }
+    
 
 
 
