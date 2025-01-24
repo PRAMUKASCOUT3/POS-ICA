@@ -88,7 +88,7 @@
                                 <td colspan="3"></td>
                             </tr>
                             <tr>
-                                <td>Total Keseluruhan <i class="fas fa-money-check-alt"></i></td>
+                                <td>Total Penjualan Bersih <i class="fas fa-money-check-alt"></i></td>
                                 <td colspan="2"></td>
                                 <td>Rp. {{ number_format($total_semua, 2, ',', '.') }}</td>
                                 <td colspan="3"></td>
