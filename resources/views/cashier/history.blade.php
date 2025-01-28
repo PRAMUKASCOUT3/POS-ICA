@@ -30,14 +30,18 @@
                                     <td>Rp. {{ number_format($transactions->first()->amount_paid, '0') }}</td>
                                     <td><span class="badge bg-success">{{ $transactions->first()->status }}</span></td>
                                     <td>
-                                        <a href="{{ route('cashier.show', $transactions->first()->code) }}">
+                                        <a href="{{ route('cashier.show', $transactions->first()->code) }}" class="btn btn-sm btn-primary">
                                             <i class="fas fa-eye"></i> Detail
+                                        </a>
+                                        <a href="{{ route('cashier.reprint', $transactions->first()->code) }}" class="btn btn-sm btn-warning" target="_blank">
+                                            <i class="fas fa-print"></i> Print Struk Ulang
                                         </a>
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
+                    
 
                 </div>
             </div>

@@ -88,7 +88,7 @@ class UserController extends Controller
 
         $cashierThisMonth = Transaction::whereBetween('created_at', [$startOfCurrentMonth, $endOfCurrentMonth])
             ->sum('subtotal');
-        $expenditureThisMonth = Expenditure::whereBetween('created_at', [$startOfCurrentMonth, $endOfCurrentMonth])
+        $expenditureThisMonth = Expenditure::whereBetween('date', [$startOfCurrentMonth, $endOfCurrentMonth])
             ->sum('nominal');
         $profitThisMonth = $cashierThisMonth - $expenditureThisMonth;
 

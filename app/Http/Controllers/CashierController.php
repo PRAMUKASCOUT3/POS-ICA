@@ -129,4 +129,18 @@ class CashierController extends Controller
         // Passing parameter filter ke CashiersExport
         return Excel::download(new CashiersExport($start_date, $end_date), 'laporan_transaksi.xlsx');
     }
+
+    public function reprint($code)
+{
+    // Ambil transaksi berdasarkan kode
+    $transactions = Transaction::where('code', $code)->get();
+
+    if ($transactions->isEmpty()) {
+        return redirect()->route('cashier.index')->with('error', 'Transaksi tidak ditemukan!');
+    }
+
+    // Kirim data ke view cetak
+    return view('cashier.struck', compact('transactions'));
+}
+
 }

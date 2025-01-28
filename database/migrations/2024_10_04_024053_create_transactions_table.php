@@ -24,6 +24,11 @@ return new class extends Migration
                 ->references('id_product')
                 ->on('products')
                 ->cascadeOnDelete();
+            $table->unsignedInteger('id_expenditure')->nullable(); // Pastikan menggunakan unsignedInteger
+            $table->foreign('id_expenditure')
+                ->references('id_expenditure')
+                ->on('expenditures')
+                ->cascadeOnDelete();
             $table->string('date',25);
             $table->string('total_item',15);
             $table->decimal('subtotal', 10, 2);
