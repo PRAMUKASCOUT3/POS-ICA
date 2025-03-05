@@ -18,7 +18,7 @@
                 <li class="sidebar-item">
                     <a href="/" class='sidebar-link {{ request()->routeIs('dashboard') ? 'active' : '' }}'>
                         <i class="bi bi-grid-fill"></i>
-                        <span>Dashboard</span>
+                        <span>Beranda</span>
                     </a>
                 </li>
 

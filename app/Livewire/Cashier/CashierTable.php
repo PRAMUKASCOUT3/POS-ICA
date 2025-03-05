@@ -13,11 +13,12 @@ class CashierTable extends Component
 {
     public $items = [];
     public $subtotal = 0;
-    public $amount_paid ;
+    public $amount_paid;
     public $total_item = 0;
     public $date;
     public $status = 'pending';
     public $change = 0;
+    public $discount ;
 
     public $products;
 
@@ -67,64 +68,58 @@ class CashierTable extends Component
 
     public function saveTransaction()
     {
-        // Validasi jika keranjang kosong
         if (empty($this->items)) {
             toastr()->error('Keranjang tidak boleh kosong!');
             return;
         }
-    
-        // Validasi pembayaran
-        if ($this->amount_paid < $this->subtotal) {
+
+        $discountAmount = ($this->subtotal * $this->discount) / 100;
+        $totalAfterDiscount = $this->subtotal - $discountAmount;
+
+        if ($this->amount_paid < $totalAfterDiscount) {
             toastr()->error('Masukkan nominal pembayaran yang cukup!');
             return;
         }
-    
-        // Validasi stok untuk semua produk di keranjang
+
         foreach ($this->items as $item) {
             $product = Product::find($item['id_product']);
-    
+
             if ($product->stock < $item['stock']) {
                 toastr()->error("Stok produk '{$product->name}' tidak mencukupi! Tersedia: {$product->stock}, diminta: {$item['stock']}.");
                 return;
             }
         }
-    
-        // Jika semua stok mencukupi, lanjutkan menyimpan transaksi
+
         foreach ($this->items as $item) {
-            $transaction = Transaction::create([
-                'code' => 'TRX-' . now()->timestamp, // Kode transaksi unik
-                'id_user' => Auth::id(), // ID pengguna yang melakukan transaksi
-                'id_product' => $item['id_product'], // ID produk
-                'date' => now()->toDateTimeString(), // Tanggal dan waktu transaksi
-                'total_item' => $item['stock'], // Jumlah produk
-                'subtotal' => $item['price_sell'] * $item['stock'], // Subtotal untuk produk ini
-                'amount_paid' => $this->amount_paid, // Total pembayaran
-                'status' => 'completed', // Status transaksi
+            Transaction::create([
+                'code' => 'TRX-' . now()->timestamp,
+                'id_user' => Auth::id(),
+                'id_product' => $item['id_product'],
+                'date' => now()->toDateTimeString(),
+                'total_item' => $item['stock'],
+                'subtotal' => $item['price_sell'] * $item['stock'],
+                'amount_paid' => $this->amount_paid,
+                'discount' => $this->discount ?? 0,
+                'status' => 'completed',
             ]);
-    
-            // Kurangi stok produk
-            $product = Product::find($item['id_product']);
+
             $product->stock -= $item['stock'];
             $product->save();
         }
-    
-        // Simpan detail transaksi untuk cetak
+
         session(['transaction' => [
             'items' => $this->items,
             'subtotal' => $this->subtotal,
             'amount_paid' => $this->amount_paid,
-            'change' => $this->amount_paid - $this->subtotal,
+            'discount' => $this->discount ?? 0,
+            'change' => $this->change,
         ]]);
-    
+
         toastr()->success('Transaksi berhasil!');
-    
-        // Reset keranjang dan form pembayaran
-        $this->reset(['items', 'subtotal', 'amount_paid']);
-    
-        // Redirect ke halaman cetak
+        $this->reset(['items', 'subtotal', 'amount_paid', 'discount']);
         return redirect()->route('cashier.print');
     }
-    
+
 
 
 
@@ -136,7 +131,9 @@ class CashierTable extends Component
 
     public function calculateChange()
     {
-        $this->change = (float) $this->amount_paid - (float) $this->subtotal;
+        $discountAmount = ($this->subtotal * $this->discount) / 100;
+        $totalAfterDiscount = $this->subtotal - $discountAmount;
+        $this->change = (float) $this->amount_paid - (float) $totalAfterDiscount;
     }
 
     // Fungsi yang otomatis dipanggil ketika amount_paid diperbarui

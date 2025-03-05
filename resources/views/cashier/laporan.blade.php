@@ -15,9 +15,14 @@
                     <form action="{{ route('cashier.excel') }}" method="GET" style="margin-right: 10px">
                         <input type="hidden" name="start_date" value="{{ request('start_date') }}">
                         <input type="hidden" name="end_date" value="{{ request('end_date') }}">
-                        <button type="submit" class="btn btn-success">Download Excel <i class="fas fa-file-excel"></i></button>
+                        <button type="submit" class="btn btn-success">Download Excel <i
+                                class="fas fa-file-excel"></i></button>
                     </form>
-                
+                    <form action="{{ route('laba.rugi') }}" method="GET" style="margin-right: 10px">
+                        <input type="hidden" name="start_date" value="{{ request('start_date') }}">
+                        <input type="hidden" name="end_date" value="{{ request('end_date') }}">
+                        <button type="submit" class="btn btn-info">Laporan Laba Rugi <i class="fas fa-print"></i></button>
+                    </form>
                     <!-- Filter Form -->
                     <form method="GET" action="{{ route('cashier.report') }}" class="d-flex align-items-center">
                         <div class="d-flex align-items mb-4" style="gap: 10px;">
@@ -33,12 +38,13 @@
                             </div>
                         </div>
                         <div class="d-flex align-items" style="gap: 10px; margin-left: 10px;">
-                            <button type="submit" class="btn btn-primary">Filter <i class="fas fa-filter fa-xs"></i></button>
-                            <a href="{{ route('cashier.report') }}" class="btn btn-danger">Reset <i class="fas fa-sync-alt fa-xs"></i></a>
+                            <button type="submit" class="btn btn-primary">Filter <i
+                                    class="fas fa-filter fa-xs"></i></button>
+                            <a href="{{ route('cashier.report') }}" class="btn btn-danger">Reset <i
+                                    class="fas fa-sync-alt fa-xs"></i></a>
                         </div>
                     </form>
                 </div>
-                
                 <!-- Transaction report table -->
                 <h5 class="card-title">Laporan Transaksi</h5>
                 <div class="table-responsive">
@@ -63,7 +69,7 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $transactions->first()->code }}</td>
                                     <td>{{ $transactions->first()->date }}</td>
-                                    <td>Rp. {{ number_format($transactions->sum('subtotal'), '0') }}</td>
+                                    <td>Rp. {{ number_format($transactions->sum('subtotal') * (1 - ($transactions->first()->discount / 100)), '0') }}</td>
                                     <td>Rp. {{ number_format($transactions->first()->amount_paid, '0') }}</td>
                                     <td><span class="badge bg-success">{{ $transactions->first()->status }}</span></td>
                                     <td>
@@ -79,6 +85,7 @@
                                 <td>Total Pendapatan <i class="fas fa-hand-holding-usd"></i></td>
                                 <td colspan="2"></td>
                                 <td>Rp. {{ number_format($total_pendapatan, 2, ',', '.') }}</td>
+                                
                                 <td colspan="3"></td>
                             </tr>
                             <tr>
@@ -94,11 +101,9 @@
                                 <td colspan="3"></td>
                             </tr>
                         </tfoot>
-                        
                     </table>
                 </div>
             </div>
-
         </div>
     </div>
 @endsection

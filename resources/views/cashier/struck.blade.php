@@ -33,17 +33,22 @@
                             </tr>
                         @endforeach
                         <tr>
-                            <td colspan="3" class="text-right">Total</td>
-                            <td>Rp. {{ number_format($transactions->sum('subtotal'), 0, ',', '.') }}</td>
+                            <td colspan="3" class="text-right">Diskon</td>
+                            <td>{{ $transactions->first()->discount }} %</td>
                         </tr>
+
+                        <tr>
+                            <td colspan="3" class="text-right">Total</td>
+                           <td>Rp. {{ number_format($transactions->sum('subtotal') * (1 - ($transactions->first()->discount / 100)), '0') }}</td>
+                        </tr>
+                       
                         <tr>
                             <td colspan="3" class="text-right">Bayar</td>
                             <td>Rp. {{ number_format($transactions->first()->amount_paid, 0, ',', '.') }}</td>
                         </tr>
                         <tr>
                             <td colspan="3" class="text-right">Kembalian</td>
-                            <td>Rp. {{ number_format($transactions->first()->amount_paid - $transactions->sum('subtotal'), 0) }}</td>
-                        </tr>
+                            <td>Rp. {{ number_format($transactions->first()->amount_paid - ($transactions->sum('subtotal') * (1 - ($transactions->first()->discount / 100))), 0) }}</td>                        </tr>
                     </tbody>
                 </table>
         

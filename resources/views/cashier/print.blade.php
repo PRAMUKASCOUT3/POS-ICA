@@ -32,9 +32,12 @@
                             </tr>
                         @endforeach
                         <tr>
-                            <td colspan="3" class="text-right">Total</td>
-                            <td>Rp. {{ number_format($cashier['subtotal'], 0, ',', '.') }}</td>
+                            <td colspan="3" class="text-right">Diskon</td>
+                            <td>{{ $cashier['discount'] }} %</td>
                         </tr>
+                        <tr>
+                            <td colspan="3" class="text-right">Total</td>
+                            <td>Rp. {{ number_format($cashier['subtotal'] * (1 - ($cashier['discount'] / 100)), 0, ',', '.') }}</td>                        </tr>
                         <tr>
                             <td colspan="3" class="text-right">Bayar</td>
                             <td>Rp. {{ number_format($cashier['amount_paid'], 0, ',', '.') }}</td>

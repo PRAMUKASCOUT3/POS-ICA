@@ -30,6 +30,7 @@ return new class extends Migration
                 ->on('expenditures')
                 ->cascadeOnDelete();
             $table->string('date',25);
+            $table->string('discount',5);
             $table->string('total_item',15);
             $table->decimal('subtotal', 10, 2);
             $table->decimal('amount_paid', 10, 2);

@@ -23,6 +23,7 @@ class Transaction extends Model
         'date',
         'total_item',
         'subtotal',
+        'discount',
         'amount_paid',
         'status',
     ];

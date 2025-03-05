@@ -18,34 +18,40 @@
 
                     <div class="col-md-6">
                         <div class="card border border-primary">
-                            <h5 class="card-header bg-primary text-white"><i class="fas fa-list"></i> Hasil Pencarian</h5>
+                            <h5 class="card-header bg-primary text-white"><i class="fas fa-list"></i> Hasil Pencarian
+                            </h5>
                             <div class="card-body" style="height: 350px; overflow-y: auto;">
                                 @if ($product->isNotEmpty())
                                     <ul class="list-group mt-3">
                                         @if ($product->isNotEmpty())
-                                        <ul class="list-group mt-3">
-                                            @foreach ($product as $item)
-                                                @if ($item->stock > 0) <!-- Cek apakah stok lebih dari 0 -->
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        <span>
-                                                            {{ $item->name }} - Rp. {{ number_format($item->price_sell, 0, ',', '.') }} | Stok: {{ $item->stock }}
-                                                        </span>
-                                                        <button class="btn btn-primary btn-sm" wire:click="addItem({{ $item->id_product }})">
-                                                            <i class="fas fa-plus"></i> Tambah
-                                                        </button>
-                                                    </li>
-                                                @endif
-                                            @endforeach
-                                        </ul>
-                                    
-                                        <!-- Pagination Links -->
-                                        <div class="mt-3">
-                                            {{ $product->links() }}
-                                        </div>
-                                    @else
-                                        <p class="mt-2">Tidak ada produk ditemukan.</p>
-                                    @endif
-                                    
+                                            <ul class="list-group mt-3">
+                                                @foreach ($product as $item)
+                                                    @if ($item->stock > 0)
+                                                        <!-- Cek apakah stok lebih dari 0 -->
+                                                        <li
+                                                            class="list-group-item d-flex justify-content-between align-items-center">
+                                                            <span>
+                                                                {{ $item->name }} - Rp.
+                                                                {{ number_format($item->price_sell, 0, ',', '.') }} |
+                                                                Stok: {{ $item->stock }}
+                                                            </span>
+                                                            <button class="btn btn-primary btn-sm"
+                                                                wire:click="addItem({{ $item->id_product }})">
+                                                                <i class="fas fa-plus"></i> Tambah
+                                                            </button>
+                                                        </li>
+                                                    @endif
+                                                @endforeach
+                                            </ul>
+
+                                            <!-- Pagination Links -->
+                                            <div class="mt-3">
+                                                {{ $product->links() }}
+                                            </div>
+                                        @else
+                                            <p class="mt-2">Tidak ada produk ditemukan.</p>
+                                        @endif
+
                                     </ul>
                                 @else
                                     <p class="mt-2">Tidak ada produk ditemukan.</p>
@@ -60,7 +66,8 @@
                     <div class="card-header bg-primary rounded">
                         <div class="d-flex justify-content-between align-items-center">
                             <h4 class="text-white">KASIR <i class="fas fa-cash-register"></i></h4>
-                            <button class="btn btn-danger" wire:click="clear"><i class="fas fa-sync-alt"></i> RESET KERANJANG</button>
+                            <button class="btn btn-danger" wire:click="clear"><i class="fas fa-sync-alt"></i> RESET
+                                KERANJANG</button>
                         </div>
                     </div>
                     <div class="card">
@@ -108,15 +115,23 @@
                                         <input id="totalSemua" value="Rp. {{ number_format($subtotal, 0, ',', '.') }}"
                                             class="form-control" readonly>
                                     </div>
-
+                                    
+                                    <div>
+                                        <label for="discount">Potongan (%)</label>
+                                            <input type="number" wire:model.live="discount" class="form-control"
+                                            id="amountPaid" min="0" placeholder="Masukkan Diskon"
+                                            required>
+                                    </div>
                                     <div>
                                         <label for="amountPaid">Bayar</label>
                                         <div class="d-flex align-items-center">
                                             <span class="input-group-text">Rp.</span>
                                             <input type="number" wire:model.live="amount_paid" class="form-control"
-                                                id="amountPaid" min="0" placeholder="Masukkan jumlah pembayaran" required>
+                                                id="amountPaid" min="0" placeholder="Masukkan jumlah pembayaran"
+                                                required>
                                         </div>
                                     </div>
+
 
                                     <div>
                                         <label for="kembali">Kembalian</label>
@@ -129,8 +144,9 @@
                                 <!-- Tombol Bayar dan Reset -->
                                 <input type="text" wire:model='user_id' hidden>
                                 <div class="mt-3 d-flex justify-content-end">
-                                   
-                                    <button class="btn btn-success me-2" wire:click="saveTransaction">Bayar <i class="fas fa-vote-yea"></i></button>
+
+                                    <button class="btn btn-success me-2" wire:click="saveTransaction">Bayar <i
+                                            class="fas fa-vote-yea"></i></button>
                                 </div>
                             </div>
                         </div>

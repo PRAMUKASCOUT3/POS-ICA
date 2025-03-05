@@ -66,7 +66,8 @@ class CashierController extends Controller
 
         // Total pendapatan dan pengeluaran
         $subtotal = Transaction::all();
-        $total_pendapatan = $subtotal->sum('subtotal');
+        $total_discount = $subtotal->sum('subtotal') * ($subtotal->first()->discount / 100);
+        $total_pendapatan = $subtotal->sum('subtotal') - $total_discount;
         $pengeluaran = $expenditure->sum('nominal');
         $total_semua = $total_pendapatan - $pengeluaran;
 
@@ -131,16 +132,53 @@ class CashierController extends Controller
     }
 
     public function reprint($code)
-{
-    // Ambil transaksi berdasarkan kode
-    $transactions = Transaction::where('code', $code)->get();
+    {
+        // Ambil transaksi berdasarkan kode
+        $transactions = Transaction::where('code', $code)->get();
 
-    if ($transactions->isEmpty()) {
-        return redirect()->route('cashier.index')->with('error', 'Transaksi tidak ditemukan!');
+        if ($transactions->isEmpty()) {
+            return redirect()->route('cashier.index')->with('error', 'Transaksi tidak ditemukan!');
+        }
+
+        // Kirim data ke view cetak
+        return view('cashier.struck', compact('transactions'));
     }
 
-    // Kirim data ke view cetak
-    return view('cashier.struck', compact('transactions'));
-}
+    public function laba_rugi(Request $request)
+    {
+        $startDate = $request->input('start_date') ? Carbon::parse($request->input('start_date'))->startOfDay() : null;
+        $endDate = $request->input('end_date') ? Carbon::parse($request->input('end_date'))->endOfDay() : null;
 
+        $cashier = Transaction::with('product')
+        ->when($startDate && $endDate, function ($query) use ($startDate, $endDate) {
+            $query->whereBetween('date', [$startDate, $endDate]);
+        })
+        ->get();        
+        $expenditures = Expenditure::whereBetween('date', [$startDate, $endDate])->get();
+
+        $total_penjualan = $cashier->sum('subtotal');
+        $penjualan_bersih = $total_penjualan;
+        $total_pendapatan = $total_penjualan;
+
+        $total_beban = $expenditures->sum('nominal');
+        $laba_sebelum_pajak = $total_pendapatan - $total_beban;
+        $pajak = $laba_sebelum_pajak * 0.11;
+        $laba_bersih = $laba_sebelum_pajak - $pajak;
+
+        $periode = ($startDate && $endDate)
+        ? date('d M Y', strtotime($startDate)) . ' - ' . date('d M Y', strtotime($endDate))
+        : '-';
+        return view('cashier.laba_rugi', [
+            'total_penjualan' => $total_penjualan,
+            'penjualan_bersih' => $penjualan_bersih,
+            'total_pendapatan' => $total_pendapatan,
+            'total_beban' => $total_beban,
+            'laba_sebelum_pajak' => $laba_sebelum_pajak,
+            'pajak' => $pajak,
+            'laba_bersih' => $laba_bersih,
+            'startDate' => $startDate,
+            'endDate' => $endDate,
+            'periode' => $periode
+        ]);
+    }
 }

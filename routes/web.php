@@ -74,5 +74,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/admin/detail-belanja/{code}',[CashierController::class,'show'])->name('cashier.show');
     Route::get('/cashier/print/{code}', [CashierController::class, 'reprint'])->name('cashier.reprint');
 
+    Route::get('/laporan-laba-rugi',[CashierController::class, 'laba_rugi'])->name('laba.rugi');
+
         
 });

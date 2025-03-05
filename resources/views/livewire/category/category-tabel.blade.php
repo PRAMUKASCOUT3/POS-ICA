@@ -23,7 +23,7 @@
                                         <div class="d-flex justify-content-center">
 
                                             <a href="{{ route('category.edit', $item->id_category) }}"
-                                                class="btn btn-info btn-sm me-2 ">Edit</a>
+                                                class="btn btn-info btn-sm me-2 ">Ubah</a>
                                             <form id="deleteForm{{ $item->id_category }}" class="d-inline"
                                                 action="{{ route('category.delete', $item->id_category) }}" method="post">
                                                 @csrf

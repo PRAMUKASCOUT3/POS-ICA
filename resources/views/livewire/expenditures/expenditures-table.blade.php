@@ -54,7 +54,7 @@
                                         <td>Rp. {{ number_format($item->nominal) }}</td>
                                         <td>
                                             <div class="d-flex justify-content-center">
-                                                <a href="{{ route('expenditures.edit', $item->id_expenditure) }}" class="btn btn-info btn-sm" style="margin-right: 5px">Edit</a>
+                                                <a href="{{ route('expenditures.edit', $item->id_expenditure) }}" class="btn btn-info btn-sm" style="margin-right: 5px">Ubah</a>
                                                 <form id="deleteForm{{ $item->id_expenditure }}" class="d-inline"
                                                     action="{{ route('expenditures.delete', $item->id_expenditure) }}" method="post">
                                                     @csrf
