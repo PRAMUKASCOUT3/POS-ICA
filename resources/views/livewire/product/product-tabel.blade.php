@@ -42,7 +42,7 @@
                                         <div class="d-flex justify-content-center">
 
                                             <a href="{{ route('product.edit', $item->id_product) }}"
-                                                class="btn btn-info btn-sm me-2">Ubah</a>
+                                                class="btn btn-info btn-sm me-2">Edit</a>
                                             <form id="deleteForm{{ $item->id_product }}" class="d-inline"
                                                 action="{{ route('product.delete', $item->id_product) }}" method="post">
                                                 @csrf

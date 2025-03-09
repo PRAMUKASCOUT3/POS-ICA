@@ -26,7 +26,7 @@
                                     <td>
                                         <div class="d-flex justify-content-center">
                                             <a href="{{ route('supplier.edit', $supplier->id_supplier) }}"
-                                                class="btn btn-info btn-sm me-2 ">Ubah</a>
+                                                class="btn btn-info btn-sm me-2 ">Edit</a>
                                             <form id="deleteForm{{ $supplier->id_supplier }}" class="d-inline"
                                                 action="{{ route('supplier.delete', $supplier->id_supplier) }}" method="post">
                                                 @csrf
