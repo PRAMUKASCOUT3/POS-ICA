@@ -39,7 +39,7 @@
                                 <label for="">Password <i class="fas fa-key"></i></label>
                                 <input type="password" class="form-control"  wire:model="password" >
                             </div>
-                            <button type="submit" class="btn btn-primary mt-2">Update</button>
+                            <button type="submit" class="btn btn-primary mt-2">Simpan</button>
                         </form>
                     </div>
                 </div>
