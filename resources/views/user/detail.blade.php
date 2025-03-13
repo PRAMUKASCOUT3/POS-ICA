@@ -25,12 +25,12 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="password" class="form-label">Password Baru</label>
+                    <label for="password" class="form-label">Kata Sandi Baru</label>
                     <input type="password" name="password" id="password" class="form-control">
-                    <small class="text-muted">Jika Tidak Merubah Password Silahkan Keluar Halaman</small>
+                    <small class="text-muted">Jika Tidak Merubah Kata Sandi Silahkan Keluar Halaman</small>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Update Profile</button>
+                <button type="submit" class="btn btn-primary">Simpan Profil</button>
             </form>
         </div>
     </div>

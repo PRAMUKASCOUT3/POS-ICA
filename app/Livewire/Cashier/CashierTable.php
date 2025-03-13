@@ -100,7 +100,7 @@ class CashierTable extends Component
                 'subtotal' => $item['price_sell'] * $item['stock'],
                 'amount_paid' => $this->amount_paid,
                 'discount' => $this->discount ?? 0,
-                'status' => 'completed',
+                'status' => 'Selesai',
             ]);
 
             $product->stock -= $item['stock'];

@@ -21,7 +21,7 @@
                 <input type="number" class="form-control" wire:model="nominal" required>
                 @error('nominal') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
-            <button type="submit" class="btn btn-primary mt-2">Submit</button>
+            <button type="submit" class="btn btn-primary mt-2">Simpan</button>
         </form>
     </div>
 </div>

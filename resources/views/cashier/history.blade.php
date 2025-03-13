@@ -12,8 +12,8 @@
                                 <th>Kode Transaksi <i class="fas fa-code"></i></th>
                                 <th>Tanggal <i class="fas fa-calendar-alt"></i></th>
                                 <th>Subtotal <i class="fas fa-dollar-sign"></i></th>
-                                <th>Discount <i class="fas fa-percent"></i></th>
-                                <th>Total Setelah Discount <i class="fas fa-tags"></i></th>
+                                <th>Diskon <i class="fas fa-percent"></i></th>
+                                <th>Total Setelah Diskon <i class="fas fa-tags"></i></th>
                                 <th>Bayar <i class="fas fa-hand-holding-usd"></i></th>
                                 <th>Status <i class="fas fa-stream"></i></th>
                                 <th>Aksi <i class="fas fa-cog"></i></th>

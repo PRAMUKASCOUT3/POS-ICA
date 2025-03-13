@@ -103,7 +103,7 @@
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->brand }}</td>
                                 @if ($item->stock == 0)
-                                    <span class="badge bg-danger text-white">Stock Habis</span>
+                                    <span class="badge bg-danger text-white">Stok Habis</span>
                                 @else
                                     @php
                                         // Calculate total items sold for this product

@@ -28,7 +28,7 @@
                                     <td>
                                         <div class="d-flex justify-content-center">
                                             <a href="{{ route('pengguna.edit', $user->id_user) }}"
-                                                class="btn btn-info btn-sm me-2">Edit</a>
+                                                class="btn btn-info btn-sm me-2">Ubah</a>
                                             <form id="deleteForm{{ $user->id_user }}" class="d-inline"
                                                 action="{{ route('pengguna.delete', $user->id_user) }}" method="post">
                                                 @csrf

@@ -65,7 +65,7 @@
                             <div class="card-body">
                                 <div class="d-flex justify-content-between">
                                     <div>
-                                        <h4><b>Supplier</b></h4>
+                                        <h4><b>Pemasok</b></h4>
                                     </div>
                                     <h4 class="text-secondary fw-bold">
                                         <li class="fas fa-dolly-flatbed"></li> {{ $supplier }}

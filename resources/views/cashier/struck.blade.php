@@ -10,7 +10,7 @@
     <div class="container d-flex justify-content-center mt-3">
         <div class="card " style="width: 30rem">
             <div class="card-body">
-                <h4 class="text-center">Struk Pembayaran Reprint</h4>
+                <h4 class="text-center">Struk Pembayaran Ulang</h4>
                 <p class="text-center">Kode Transaksi: {{ $transactions->first()->code }}</p>
                 <p class="text-center">Tanggal: {{ now()->format('Y-m-d H:i:s') }}</p>
                 <p class="text-center">Kasir: {{ Auth::user()->name }}</p>

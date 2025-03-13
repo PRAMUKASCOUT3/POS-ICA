@@ -58,7 +58,7 @@
                             </li>
 
                             <li class="submenu-item ">
-                                <a href="{{ route('supplier.index') }}">Data Supplier</a>
+                                <a href="{{ route('supplier.index') }}">Data Pemasok</a>
                             </li>
                         </ul>
                     </li>

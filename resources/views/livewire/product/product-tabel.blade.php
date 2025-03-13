@@ -30,7 +30,7 @@
                                     <td>{{ $item->brand }}</td>
                                     <td>
                                         @if ($item->stock == 0)
-                                            <span class="badge bg-danger text-white">Stock Habis</span>
+                                            <span class="badge bg-danger text-white">Stok Habis</span>
                                         @else
                                             {{ $item->stock }}
                                         @endif
@@ -42,7 +42,7 @@
                                         <div class="d-flex justify-content-center">
 
                                             <a href="{{ route('product.edit', $item->id_product) }}"
-                                                class="btn btn-info btn-sm me-2">Edit</a>
+                                                class="btn btn-info btn-sm me-2">Ubah</a>
                                             <form id="deleteForm{{ $item->id_product }}" class="d-inline"
                                                 action="{{ route('product.delete', $item->id_product) }}" method="post">
                                                 @csrf

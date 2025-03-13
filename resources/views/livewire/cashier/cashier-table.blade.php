@@ -66,8 +66,7 @@
                     <div class="card-header bg-primary rounded">
                         <div class="d-flex justify-content-between align-items-center">
                             <h4 class="text-white">KASIR <i class="fas fa-cash-register"></i></h4>
-                            <button class="btn btn-danger" wire:click="clear"><i class="fas fa-sync-alt"></i> RESET
-                                KERANJANG</button>
+                            <button class="btn btn-danger" wire:click="clear"><i class="fas fa-sync-alt"></i> Atur Ulang Keranjang</button>
                         </div>
                     </div>
                     <div class="card">

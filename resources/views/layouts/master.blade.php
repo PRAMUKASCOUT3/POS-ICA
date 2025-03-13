@@ -82,7 +82,7 @@
                                         @csrf
 
                                         <button class="dropdown-item" type="submit"><i
-                                            class="icon-mid bi bi-box-arrow-left me-2"></i>Logout</button>
+                                            class="icon-mid bi bi-box-arrow-left me-2"></i>Keluar</button>
                                     </form>
                                 </ul>
                             </div>
@@ -98,10 +98,7 @@
                         <div class="float-start">
                             <p>2024 &copy; Skirpsi</p>
                         </div>
-                        <div class="float-end">
-                            <p>Crafted with <span class="text-danger"><i class="bi bi-heart"></i></span> by <a
-                                    href="http://ahmadsaugi.com">A. Saugi</a></p>
-                        </div>
+                       
                     </div>
                 </footer>
             </div>

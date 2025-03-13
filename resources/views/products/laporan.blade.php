@@ -4,8 +4,8 @@
     <div class="container">
         <div class="card">
             <div class="card-body">
-                <a href="{{ route('product.print') }}" class="btn btn-danger mb-3">Download PDF <i class="fas fa-file-pdf"></i></a>
-                <a href="{{ route('product.excel') }}" class="btn btn-success mb-3">Download Excel <i class="fas fa-file-excel"></i></a>
+                <a href="{{ route('product.print') }}" class="btn btn-danger mb-3">Unduh PDF <i class="fas fa-file-pdf"></i></a>
+                <a href="{{ route('product.excel') }}" class="btn btn-success mb-3">Unduh Excel <i class="fas fa-file-excel"></i></a>
                 <h5 class="card-title">Laporan Produk</h5>
                 <table id="example" class="table table-striped mt-2">
                     <thead>
@@ -30,7 +30,7 @@
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->brand }}</td>
                                 @if ($item->stock == 0)
-                                    <td><span class="badge bg-danger text-white">Stock Habis</span></td>
+                                    <td><span class="badge bg-danger text-white">Stok Habis</span></td>
                                 @else
                                     @php
                                         $total_sold = $item->transaction ? $item->transaction->sum('total_item') : 0;

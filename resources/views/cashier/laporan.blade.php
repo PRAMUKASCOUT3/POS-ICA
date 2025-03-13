@@ -10,18 +10,18 @@
                     <form action="{{ route('cashier.pdf') }}" method="GET" style="margin-right: 10px">
                         <input type="hidden" name="start_date" value="{{ request('start_date') }}">
                         <input type="hidden" name="end_date" value="{{ request('end_date') }}">
-                        <button type="submit" class="btn btn-danger">Download PDF <i class="fas fa-file-pdf"></i></button>
+                        <button type="submit" class="btn btn-danger">Unduh PDF <i class="fas fa-file-pdf"></i></button>
                     </form>
                     <form action="{{ route('cashier.excel') }}" method="GET" style="margin-right: 10px">
                         <input type="hidden" name="start_date" value="{{ request('start_date') }}">
                         <input type="hidden" name="end_date" value="{{ request('end_date') }}">
-                        <button type="submit" class="btn btn-success">Download Excel <i
+                        <button type="submit" class="btn btn-success">Unduh Excel <i
                                 class="fas fa-file-excel"></i></button>
                     </form>
                     <form action="{{ route('laba.rugi') }}" method="GET" style="margin-right: 10px">
                         <input type="hidden" name="start_date" value="{{ request('start_date') }}">
                         <input type="hidden" name="end_date" value="{{ request('end_date') }}">
-                        <button type="submit" class="btn btn-info">Laporan Laba Rugi <i class="fas fa-print"></i></button>
+                        <button type="submit" class="btn btn-info">Unduh Laporan Laba Rugi <i class="fas fa-print"></i></button>
                     </form>
                     <!-- Filter Form -->
                     <form method="GET" action="{{ route('cashier.report') }}" class="d-flex align-items-center">
@@ -40,7 +40,7 @@
                         <div class="d-flex align-items" style="gap: 10px; margin-left: 10px;">
                             <button type="submit" class="btn btn-primary">Filter <i
                                     class="fas fa-filter fa-xs"></i></button>
-                            <a href="{{ route('cashier.report') }}" class="btn btn-danger">Reset <i
+                            <a href="{{ route('cashier.report') }}" class="btn btn-danger">Mengatur Ulang <i
                                     class="fas fa-sync-alt fa-xs"></i></a>
                         </div>
                     </form>
@@ -69,7 +69,10 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $transactions->first()->code }}</td>
                                     <td>{{ $transactions->first()->date }}</td>
-                                    <td>Rp. {{ number_format($transactions->sum('subtotal') * (1 - ($transactions->first()->discount / 100)), '0') }}</td>
+                                    <td>
+                                        Rp.
+                                        {{ number_format($transactions->isNotEmpty() ? $transactions->sum('subtotal') * (1 - ($transactions->first()->discount ?? 0) / 100) : 0, 0) }}
+                                    </td>
                                     <td>Rp. {{ number_format($transactions->first()->amount_paid, '0') }}</td>
                                     <td><span class="badge bg-success">{{ $transactions->first()->status }}</span></td>
                                     <td>
@@ -85,7 +88,7 @@
                                 <td>Total Pendapatan <i class="fas fa-hand-holding-usd"></i></td>
                                 <td colspan="2"></td>
                                 <td>Rp. {{ number_format($total_pendapatan, 2, ',', '.') }}</td>
-                                
+
                                 <td colspan="3"></td>
                             </tr>
                             <tr>

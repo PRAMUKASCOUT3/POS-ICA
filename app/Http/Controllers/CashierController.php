@@ -66,7 +66,7 @@ class CashierController extends Controller
 
         // Total pendapatan dan pengeluaran
         $subtotal = Transaction::all();
-        $total_discount = $subtotal->sum('subtotal') * ($subtotal->first()->discount / 100);
+        $total_discount = $subtotal->isNotEmpty() ? $subtotal->sum('subtotal') * (($subtotal->first()->discount ?? 0) / 100): 0;
         $total_pendapatan = $subtotal->sum('subtotal') - $total_discount;
         $pengeluaran = $expenditure->sum('nominal');
         $total_semua = $total_pendapatan - $pengeluaran;
@@ -150,10 +150,10 @@ class CashierController extends Controller
         $endDate = $request->input('end_date') ? Carbon::parse($request->input('end_date'))->endOfDay() : null;
 
         $cashier = Transaction::with('product')
-        ->when($startDate && $endDate, function ($query) use ($startDate, $endDate) {
-            $query->whereBetween('date', [$startDate, $endDate]);
-        })
-        ->get();        
+            ->when($startDate && $endDate, function ($query) use ($startDate, $endDate) {
+                $query->whereBetween('date', [$startDate, $endDate]);
+            })
+            ->get();
         $expenditures = Expenditure::whereBetween('date', [$startDate, $endDate])->get();
 
         $total_penjualan = $cashier->sum('subtotal');
@@ -166,8 +166,8 @@ class CashierController extends Controller
         $laba_bersih = $laba_sebelum_pajak - $pajak;
 
         $periode = ($startDate && $endDate)
-        ? date('d M Y', strtotime($startDate)) . ' - ' . date('d M Y', strtotime($endDate))
-        : '-';
+            ? date('d M Y', strtotime($startDate)) . ' - ' . date('d M Y', strtotime($endDate))
+            : '-';
         return view('cashier.laba_rugi', [
             'total_penjualan' => $total_penjualan,
             'penjualan_bersih' => $penjualan_bersih,
