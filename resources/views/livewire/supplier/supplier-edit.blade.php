@@ -8,7 +8,7 @@
                     </div>
                     <div class="card-body">
                         <div class="md-3">
-                            <label for="">Nama Supplier <i class="fas fa-file-signature"></i></label>
+                            <label for="">Nama Pemasok<i class="fas fa-file-signature"></i></label>
                             <input type="text" class="form-control"  value="{{ $suppliers->name }}" readonly>
                         </div>
                         <div class="md-3">
@@ -28,7 +28,7 @@
                     <div class="card-body">
                         <form wire:submit="update">
                             <div class="md-3">
-                                <label>Nama Supplier <i class="fas fa-file-signature"></i></label>
+                                <label>Nama Pemasok<i class="fas fa-file-signature"></i></label>
                                 <input type="text" class="form-control" wire:model="name" required>
                                 @error('name') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>

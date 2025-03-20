@@ -7,7 +7,7 @@
     <div class="modal-body">
         <form wire:submit.prevent="save">
             <div class="mb-3">
-                <label>Nama Supplier <i class="fas fa-file-signature"></i></label>
+                <label>Nama Pemasok<i class="fas fa-file-signature"></i></label>
                 <input type="text" class="form-control" wire:model="name" required>
                 @error('name') <span class="text-danger">{{ $message }}</span> @enderror
             </div>

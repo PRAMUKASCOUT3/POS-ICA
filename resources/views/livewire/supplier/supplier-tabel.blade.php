@@ -2,10 +2,10 @@
     <div class="container">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Data Supplier <i class="fas fa-dolly-flatbed"></i></h5>
+                <h5 class="card-title">Data Pemasok <i class="fas fa-dolly-flatbed"></i></h5>
                 <div>
                     <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#createSupplierModal"><i
-                            class="fas fa-plus"></i> Tambah Supplier</button>
+                            class="fas fa-plus"></i> Tambah Pemasok</button>
                     <table id="example" class="table">
                         <thead>
                             <tr>
@@ -41,7 +41,7 @@
                         </tbody>
                     </table>
 
-                    <!-- Modal Create Supplier -->
+                    <!-- Modal Create Pemasok -->
                     <div class="modal fade" id="createSupplierModal">
                         <div class="modal-dialog">
                             <div class="modal-content">

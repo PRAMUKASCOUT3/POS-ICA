@@ -16,7 +16,7 @@
                             <input type="text" class="form-control"  value="{{ $user->email }}" readonly>
                         </div>
                         <div class="mb-3">
-                            <label for="">Password <i class="fas fa-key"></i></label>
+                            <label for="">Kata Sandi <i class="fas fa-key"></i></label>
                             <input type="password" class="form-control"  value="{{ $user->password }}" readonly>
                         </div>
                     </div>
@@ -36,7 +36,7 @@
                                 <input type="email" class="form-control"  wire:model="email" >
                             </div>
                             <div class="mb-3">
-                                <label for="">Password <i class="fas fa-key"></i></label>
+                                <label for="">Kata Sandi <i class="fas fa-key"></i></label>
                                 <input type="password" class="form-control"  wire:model="password" >
                             </div>
                             <button type="submit" class="btn btn-primary mt-2">Simpan</button>

@@ -18,7 +18,7 @@
                 @error('email') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
             <div class="mb-3">
-                <label>Password <i class="fas fa-key"></i></label>
+            <label>Kata Sandi <i class="fas fa-key"></i></label>
                 <input type="password" class="form-control" wire:model="password" required>
                 @error('password') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
